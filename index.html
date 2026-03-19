@@ -17,8 +17,8 @@
 
     /* NAVBAR */
     nav {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
       padding: 20px 40px;
       border-bottom: 1px solid rgba(0,0,0,0.08);
@@ -26,35 +26,41 @@
       backdrop-filter: blur(10px);
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    /* 中間 PAC */
+    .center-logo {
+      text-align: center;
       font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 600;
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: 2px;
     }
 
-    .nav-links a {
-      margin-left: 20px;
-      text-decoration: none;
-      color: black;
+    /* 右邊選單 */
+    .nav-right {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
       font-size: 14px;
     }
 
-    .nav-links a:hover {
+    .nav-right a {
+      text-decoration: none;
+      color: black;
+    }
+
+    .nav-right a:hover {
       opacity: 0.6;
     }
 
     /* HERO */
     .hero {
       text-align: center;
-      padding: 100px 20px;
+      padding: 120px 20px;
     }
 
     .hero img {
-      height: 90px;
-      margin-bottom: 20px;
+      height: 220px; /* 🔥 超大 logo */
+      margin-bottom: 40px;
     }
 
     h1 {
@@ -73,7 +79,7 @@
 
     .button {
       margin-top: 30px;
-      padding: 12px 22px;
+      padding: 14px 26px;
       background: black;
       color: white;
       border: none;
@@ -93,14 +99,15 @@
 
   <!-- NAVBAR -->
   <nav>
-    <div class="logo">
-      PAC
-     <img src="logo.png" style="height:32px;">
-    </div>
+    <div></div>
 
-    <div class="nav-links">
+    <div class="center-logo">PAC</div>
+
+    <div class="nav-right">
       <a href="#">About</a>
       <a href="#">Students</a>
+      <a href="#">Teachers</a>
+      <a href="#">Courses</a>
       <a href="#">Login</a>
     </div>
   </nav>
@@ -108,14 +115,14 @@
   <!-- HERO -->
   <div class="hero">
 
-    <img src="logo.png" style="height:140px; margin-bottom:30px;">
+    <img src="logo.png" alt="PAC logo">
 
     <h1>
       Global music education, without borders.
     </h1>
 
     <p class="subtitle">
-      Connecting serious music students with international teachers and real opportunities.
+      Connecting serious music students with international teachers, perspectives, and real opportunities.
     </p>
 
     <button class="button">
