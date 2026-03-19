@@ -1,344 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PAC</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#f5ecd9;
-      --text:#111;
-      --soft:#5c5c5c;
-      --card:rgba(255,255,255,0.78);
-      --line:rgba(0,0,0,0.08);
-      --button:#222;
-      --button-hover:#444;
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f5ecd9;
+      color: #111;
     }
 
-    *{
-      box-sizing:border-box;
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(10px);
     }
 
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:Inter, sans-serif;
-      line-height:1.7;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 600;
     }
 
-    nav{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:20px 24px;
-      border-bottom:1px solid var(--line);
-      position:sticky;
-      top:0;
-      background:rgba(245,236,217,0.92);
-      backdrop-filter:blur(10px);
-      z-index:10;
+    .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: black;
+      font-size: 14px;
     }
 
-    .logo{
-      font-family:"Playfair Display", serif;
-      font-size:24px;
-      font-weight:700;
+    .nav-links a:hover {
+      opacity: 0.6;
     }
 
-    nav a{
-      text-decoration:none;
-      color:var(--text);
-      margin-left:18px;
-      font-size:14px;
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
     }
 
-    nav a:hover{
-      opacity:0.65;
+    .hero img {
+      height: 80px;
+      margin-bottom: 20px;
     }
 
-    .container{
-      max-width:980px;
-      margin:auto;
-      padding:0 20px 80px;
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 60px;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.1;
     }
 
-    .hero{
-      padding:80px 0 30px;
+    .subtitle {
+      color: #666;
+      margin-top: 20px;
+      font-size: 18px;
     }
 
-    h1{
-      font-family:"Playfair Display", serif;
-      font-size:60px;
-      line-height:1.08;
-      margin:0 0 18px;
-      max-width:800px;
+    .button {
+      margin-top: 30px;
+      padding: 12px 22px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
     }
 
-    .hero p{
-      font-size:18px;
-      color:var(--soft);
-      max-width:760px;
-      margin:0 0 16px;
+    .button:hover {
+      background: #333;
     }
 
-    .buttons{
-      margin-top:28px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      display:inline-block;
-      padding:12px 18px;
-      border-radius:12px;
-      text-decoration:none;
-      font-size:14px;
-      font-weight:500;
-      transition:0.2s ease;
-    }
-
-    .btn-primary{
-      background:var(--button);
-      color:#fff;
-    }
-
-    .btn-primary:hover{
-      background:var(--button-hover);
-    }
-
-    .btn-secondary{
-      background:rgba(255,255,255,0.45);
-      color:var(--text);
-      border:1px solid var(--line);
-    }
-
-    .btn-secondary:hover{
-      background:rgba(255,255,255,0.7);
-    }
-
-    section{
-      margin-top:72px;
-    }
-
-    h2{
-      font-family:"Playfair Display", serif;
-      font-size:38px;
-      margin:0 0 14px;
-    }
-
-    .section-intro{
-      color:var(--soft);
-      max-width:760px;
-      margin-bottom:18px;
-    }
-
-    .card{
-      background:var(--card);
-      padding:28px;
-      border-radius:22px;
-      box-shadow:0 12px 28px rgba(0,0,0,0.05);
-      margin-bottom:18px;
-    }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:18px;
-    }
-
-    ul{
-      margin:10px 0 0 18px;
-      padding:0;
-    }
-
-    li{
-      margin-bottom:10px;
-    }
-
-    .small{
-      color:var(--soft);
-      font-size:15px;
-    }
-
-    footer{
-      margin-top:70px;
-      padding-top:24px;
-      border-top:1px solid var(--line);
-      color:var(--soft);
-      font-size:14px;
-    }
-
-    @media (max-width:760px){
-      nav{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:12px;
-      }
-
-      nav a{
-        margin-left:0;
-        margin-right:14px;
-      }
-
-      h1{
-        font-size:42px;
-      }
-
-      h2{
-        font-size:30px;
-      }
-
-      .grid-2{
-        grid-template-columns:1fr;
-      }
-
-      .hero{
-        padding-top:48px;
-      }
-    }
   </style>
 </head>
+
 <body>
 
+  <!-- NAVBAR -->
   <nav>
-    <div class="logo">PAC</div>
-    <div>
-      <a href="#about">About</a>
-      <a href="#problem">Problem</a>
-      <a href="#for">Who It’s For</a>
-      <a href="#pilot">Join</a>
-      <a href="#contact">Contact</a>
+    <div class="logo">
+      PAC
+      <img src="logo.png" alt="PAC logo" style="height:28px;">
+    </div>
+
+    <div class="nav-links">
+      <a href="#">About</a>
+      <a href="#">Students</a>
+      <a href="#">Login</a>
     </div>
   </nav>
 
-  <div class="container">
+  <!-- HERO -->
+  <div class="hero">
 
-    <section class="hero">
-      <h1>A global music education platform connecting serious students to international perspective.</h1>
+    <img src="logo.png" alt="PAC logo">
 
-      <p>
-        PAC is designed for music students who want more than just technical training. It creates a bridge between Asian music education and broader global music culture.
-      </p>
+    <h1>
+      Global music education, without borders.
+    </h1>
 
-      <p>
-        The goal is to make music education feel more open, more human, and less limited by geography.
-      </p>
+    <p class="subtitle">
+      Connecting serious music students with international teachers, perspectives, and real opportunities.
+    </p>
 
-      <div class="buttons">
-        <a class="btn btn-primary" href="#pilot">Join the Pilot</a>
-        <a class="btn btn-secondary" href="#about">Learn More</a>
-      </div>
-    </section>
-
-    <section id="about">
-      <h2>What PAC Is</h2>
-      <div class="card">
-        <p>
-          PAC is a global music education platform focused on helping serious students in Asia access international teaching, creative perspective, and broader musical opportunity without having to relocate abroad.
-        </p>
-        <p>
-          It is also designed to create more flexible teaching opportunities for musicians who want to share their skills across cities and countries in a more direct way.
-        </p>
-      </div>
-    </section>
-
-    <section id="problem">
-      <h2>The Problem</h2>
-      <p class="section-intro">
-        Many music students train seriously for years, but still feel limited by local systems, expensive institutions, and unclear career paths.
-      </p>
-
-      <div class="grid-2">
-        <div class="card">
-          <h3>For students</h3>
-          <ul>
-            <li>Studying abroad is expensive and unrealistic for many families.</li>
-            <li>Traditional systems can feel exam-oriented, narrow, or disconnected from the global music industry.</li>
-            <li>Online content exists, but it is often too scattered to create real direction.</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>For teachers</h3>
-          <ul>
-            <li>Many skilled musicians struggle to find stable teaching opportunities.</li>
-            <li>Traditional institutions often take a large percentage because of overhead and administration.</li>
-            <li>Cross-border teaching is possible, but there is still no clear bridge.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="for">
-      <h2>Who This Is For</h2>
-      <div class="card">
-        <ul>
-          <li>Serious music students in Asia who want more than exam-based training</li>
-          <li>Students who are curious about Western music production, arranging, and creative thinking</li>
-          <li>Learners who want structured guidance, not just random online tutorials</li>
-          <li>Musicians who care deeply about growth and long-term direction</li>
-        </ul>
-        <p class="small">
-          PAC is built for students who want access to a bigger music world without losing the context of where they come from.
-        </p>
-      </div>
-    </section>
-
-    <section id="pilot">
-      <h2>Join the Pilot</h2>
-      <div class="card">
-        <p>
-          I’m currently looking for a small group of serious music students in Asia who feel stuck in traditional systems and want a different kind of musical perspective.
-        </p>
-
-        <p><strong>What you’ll get:</strong></p>
-        <ul>
-          <li>One-to-one international mentorship</li>
-          <li>Structured feedback on your work</li>
-          <li>Exposure to a different music culture and creative approach</li>
-        </ul>
-
-        <p><strong>What I need from you:</strong></p>
-        <ul>
-          <li>Commitment to learning</li>
-          <li>Honest feedback</li>
-          <li>Willingness to experiment and grow</li>
-        </ul>
-
-        <a class="btn btn-primary" href="mailto:hlin6@berklee.edu?subject=PAC Pilot Interest">Join the Pilot</a>
-      </div>
-    </section>
-
-    <section>
-      <h2>Why It Matters</h2>
-      <div class="card">
-        <p>
-          Music is not just a skill. It is also culture. Culture grows through exchange, but that exchange is not always equal.
-        </p>
-        <p>
-          PAC comes from the belief that talented music students should not be limited by geography, and that meaningful music education should create real opportunity, not just technical achievement.
-        </p>
-      </div>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <div class="card">
-        <p>
-          Interested in the pilot, collaboration, or just want to learn more?
-        </p>
-        <a class="btn btn-primary" href="mailto:hlin6@berklee.edu">Contact Me</a>
-      </div>
-    </section>
-
-    <footer>
-      PAC by Vicky Lin
-    </footer>
+    <button class="button">
+      Join the Pilot
+    </button>
 
   </div>
 
