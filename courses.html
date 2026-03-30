@@ -26,6 +26,7 @@ nav {
   text-align: center;
   font-family: 'Playfair Display', serif;
   font-size: 50px;
+  line-height: 1;
 }
 
 .nav-right {
@@ -35,6 +36,682 @@ nav {
   flex-wrap: wrap;
 }
 
+.nav-right a {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.nav-right a:hover {
+  opacity: 0.6;
+}
+
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 70px 40px 100px;
+}
+
+.hero {
+  margin-bottom: 34px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 62px;
+  margin: 0 0 12px 0;
+  line-height: 1.05;
+}
+
+.hero p {
+  color: #555;
+  font-size: 17px;
+  max-width: 720px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.top-controls {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  margin: 30px 0 26px;
+  align-items: center;
+}
+
+.search-box input,
+.sort-box select,
+.filter-group select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.85);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.filters {
+  background: rgba(255,255,255,0.68);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 20px;
+  padding: 22px;
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 20px;
+}
+
+.filters h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  margin: 0 0 18px 0;
+}
+
+.filter-group {
+  margin-bottom: 18px;
+}
+
+.filter-group label {
+  display: block;
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.filter-btn {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+}
+
+.filter-btn.primary {
+  background: black;
+  color: white;
+}
+
+.filter-btn.secondary {
+  background: rgba(0,0,0,0.06);
+  color: #222;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.results-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  margin: 0;
+}
+
+.results-count {
+  color: #666;
+  font-size: 14px;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.course-card {
+  background: rgba(255,255,255,0.68);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  min-height: 270px;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.course-card h3 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.price {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  white-space: nowrap;
+}
+
+.teacher {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.course-card p {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.75;
+  margin: 0 0 18px 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #ede8dc;
+  color: #333;
+}
+
+.empty-state {
+  background: rgba(255,255,255,0.68);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 20px;
+  padding: 30px;
+  color: #666;
+  line-height: 1.7;
+}
+
+@media (max-width: 1180px) {
+  .course-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  nav {
+    padding: 20px 24px;
+  }
+
+  .brand {
+    font-size: 42px;
+  }
+
+  .nav-right {
+    gap: 14px;
+  }
+
+  .container {
+    padding: 50px 24px 90px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+  }
+
+  .top-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .filters {
+    position: static;
+  }
+
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div></div>
+  <div class="brand">PAC</div>
+  <div class="nav-right">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="login.html">Login</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <h1>Explore courses that fit your path.</h1>
+    <p>
+      Browse music courses by instrument, level, format, language, and price. Find the learning experience that feels right for you.
+    </p>
+  </div>
+
+  <div class="top-controls">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search courses, teachers, or topics...">
+    </div>
+
+    <div class="sort-box">
+      <select id="sortSelect">
+        <option value="popular">Sort by: Most Popular</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="title-az">Title: A to Z</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="main-layout">
+
+    <aside class="filters">
+      <h2>Filters</h2>
+
+      <div class="filter-group">
+        <label for="formatFilter">Format</label>
+        <select id="formatFilter">
+          <option value="">All Formats</option>
+          <option value="Online">Online</option>
+          <option value="In-person">In-person</option>
+          <option value="Hybrid">Hybrid</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="priceFilter">Price</label>
+        <select id="priceFilter">
+          <option value="">All Prices</option>
+          <option value="under50">Under $50</option>
+          <option value="50to80">$50–$80</option>
+          <option value="above80">Above $80</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="categoryFilter">Instrument / Category</label>
+        <select id="categoryFilter">
+          <option value="">All Categories</option>
+          <option value="Piano">Piano</option>
+          <option value="Voice">Voice</option>
+          <option value="Production">Production</option>
+          <option value="Composition">Composition</option>
+          <option value="Guitar">Guitar</option>
+          <option value="Violin">Violin</option>
+          <option value="Drums">Drums</option>
+          <option value="Jazz">Jazz</option>
+          <option value="Film Scoring">Film Scoring</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="languageFilter">Language</label>
+        <select id="languageFilter">
+          <option value="">All Languages</option>
+          <option value="English">English</option>
+          <option value="Mandarin">Mandarin</option>
+          <option value="Spanish">Spanish</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="levelFilter">Level</label>
+        <select id="levelFilter">
+          <option value="">All Levels</option>
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+      </div>
+
+      <div class="filter-actions">
+        <button class="filter-btn primary" onclick="applyFilters()">Apply</button>
+        <button class="filter-btn secondary" onclick="resetFilters()">Reset</button>
+      </div>
+    </aside>
+
+    <main>
+      <div class="results-header">
+        <h2>Available Courses</h2>
+        <div class="results-count" id="resultsCount"></div>
+      </div>
+
+      <div class="course-grid" id="courseGrid"></div>
+      <div id="emptyState" style="display:none;" class="empty-state">
+        No courses match your search or filters.
+      </div>
+    </main>
+
+  </div>
+</div>
+
+<script>
+const defaultCourses = [
+  {
+    title: "Piano Fundamentals",
+    teacher: "Instructor A",
+    description: "Build strong technique, musicality, and confidence through guided piano training.",
+    category: "Piano",
+    level: "Beginner",
+    format: "Online",
+    language: "English",
+    price: 45,
+    popularity: 95
+  },
+  {
+    title: "Contemporary Voice",
+    teacher: "Instructor B",
+    description: "Train vocal technique, breath support, and stage confidence for modern performance.",
+    category: "Voice",
+    level: "Intermediate",
+    format: "In-person",
+    language: "Mandarin",
+    price: 38,
+    popularity: 88
+  },
+  {
+    title: "Music Production Basics",
+    teacher: "Instructor C",
+    description: "Learn DAWs, recording, arrangement, and workflow for digital music production.",
+    category: "Production",
+    level: "Beginner",
+    format: "Online",
+    language: "English",
+    price: 55,
+    popularity: 93
+  },
+  {
+    title: "Songwriting Workshop",
+    teacher: "Isabella Moore",
+    description: "Explore lyric writing, melody building, and composition through creative weekly sessions.",
+    category: "Composition",
+    level: "Intermediate",
+    format: "Hybrid",
+    language: "English",
+    price: 42,
+    popularity: 91
+  },
+  {
+    title: "Jazz Improvisation",
+    teacher: "Daniel Kim",
+    description: "Develop phrasing, harmony awareness, and improvisational confidence in jazz settings.",
+    category: "Jazz",
+    level: "Advanced",
+    format: "Online",
+    language: "English",
+    price: 68,
+    popularity: 86
+  },
+  {
+    title: "Film Scoring",
+    teacher: "Lucia Rivera",
+    description: "Learn how to write music for visual storytelling with cinematic structure and emotion.",
+    category: "Film Scoring",
+    level: "Advanced",
+    format: "Online",
+    language: "Spanish",
+    price: 72,
+    popularity: 84
+  },
+  {
+    title: "Acoustic Guitar Essentials",
+    teacher: "Noah Patel",
+    description: "Build a strong guitar foundation through chord work, rhythm, and musical expression.",
+    category: "Guitar",
+    level: "Beginner",
+    format: "In-person",
+    language: "English",
+    price: 48,
+    popularity: 82
+  },
+  {
+    title: "Violin Technique Studio",
+    teacher: "Mei Chen",
+    description: "Strengthen posture, intonation, bow control, and expressive violin playing.",
+    category: "Violin",
+    level: "Intermediate",
+    format: "Hybrid",
+    language: "Mandarin",
+    price: 76,
+    popularity: 80
+  },
+  {
+    title: "Drum Groove Lab",
+    teacher: "Carlos Vega",
+    description: "Improve timing, groove, coordination, and dynamic control across different styles.",
+    category: "Drums",
+    level: "Intermediate",
+    format: "In-person",
+    language: "Spanish",
+    price: 58,
+    popularity: 79
+  },
+  {
+    title: "Advanced Piano Interpretation",
+    teacher: "Sofia Laurent",
+    description: "Refine musical phrasing, tone control, and interpretive decisions in advanced repertoire.",
+    category: "Piano",
+    level: "Advanced",
+    format: "Hybrid",
+    language: "English",
+    price: 92,
+    popularity: 77
+  },
+  {
+    title: "Mandarin Voice Coaching",
+    teacher: "Yuki Lin",
+    description: "Develop healthy vocal technique and performance confidence in Mandarin repertoire.",
+    category: "Voice",
+    level: "Beginner",
+    format: "Online",
+    language: "Mandarin",
+    price: 50,
+    popularity: 74
+  },
+  {
+    title: "Creative Composition Lab",
+    teacher: "Marco Ellis",
+    description: "Experiment with harmony, texture, and structure to build a more original compositional voice.",
+    category: "Composition",
+    level: "Advanced",
+    format: "Online",
+    language: "English",
+    price: 83,
+    popularity: 76
+  }
+];
+
+function getCustomCourses() {
+  return JSON.parse(localStorage.getItem("customCourses")) || [];
+}
+
+function mapCustomCourses() {
+  const customCourses = getCustomCourses();
+  return customCourses.map(course => ({
+    title: course.title,
+    teacher: course.teacher || "Instructor",
+    description: course.description,
+    category: inferCategory(course.title),
+    level: course.level,
+    format: course.format,
+    language: "English",
+    price: parsePrice(course.price),
+    popularity: 70
+  }));
+}
+
+function parsePrice(priceValue) {
+  const num = String(priceValue).replace(/[^0-9.]/g, "");
+  return Number(num) || 0;
+}
+
+function inferCategory(title) {
+  const t = title.toLowerCase();
+  if (t.includes("piano")) return "Piano";
+  if (t.includes("voice") || t.includes("vocal") || t.includes("sing")) return "Voice";
+  if (t.includes("guitar")) return "Guitar";
+  if (t.includes("violin")) return "Violin";
+  if (t.includes("drum")) return "Drums";
+  if (t.includes("film")) return "Film Scoring";
+  if (t.includes("jazz")) return "Jazz";
+  if (t.includes("production")) return "Production";
+  return "Composition";
+}
+
+function getAllCourses() {
+  return [...defaultCourses, ...mapCustomCourses()];
+}
+
+function createCourseCard(course) {
+  return `
+    <div class="course-card">
+      <div class="card-top">
+        <h3>${course.title}</h3>
+        <div class="price">$${course.price}</div>
+      </div>
+      <div class="teacher">${course.teacher}</div>
+      <p>${course.description}</p>
+      <div class="tags">
+        <span class="tag">${course.category}</span>
+        <span class="tag">${course.level}</span>
+        <span class="tag">${course.format}</span>
+        <span class="tag">${course.language}</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderCourses(courses) {
+  const grid = document.getElementById("courseGrid");
+  const emptyState = document.getElementById("emptyState");
+  const resultsCount = document.getElementById("resultsCount");
+
+  resultsCount.innerText = `${courses.length} course${courses.length === 1 ? "" : "s"} found`;
+
+  if (courses.length === 0) {
+    grid.innerHTML = "";
+    emptyState.style.display = "block";
+    return;
+  }
+
+  emptyState.style.display = "none";
+  grid.innerHTML = courses.map(createCourseCard).join("");
+}
+
+function applyFilters() {
+  let courses = getAllCourses();
+
+  const searchValue = document.getElementById("searchInput").value.trim().toLowerCase();
+  const sortValue = document.getElementById("sortSelect").value;
+  const formatValue = document.getElementById("formatFilter").value;
+  const priceValue = document.getElementById("priceFilter").value;
+  const categoryValue = document.getElementById("categoryFilter").value;
+  const languageValue = document.getElementById("languageFilter").value;
+  const levelValue = document.getElementById("levelFilter").value;
+
+  if (searchValue) {
+    courses = courses.filter(course =>
+      course.title.toLowerCase().includes(searchValue) ||
+      course.teacher.toLowerCase().includes(searchValue) ||
+      course.description.toLowerCase().includes(searchValue) ||
+      course.category.toLowerCase().includes(searchValue)
+    );
+  }
+
+  if (formatValue) {
+    courses = courses.filter(course => course.format === formatValue);
+  }
+
+  if (categoryValue) {
+    courses = courses.filter(course => course.category === categoryValue);
+  }
+
+  if (languageValue) {
+    courses = courses.filter(course => course.language === languageValue);
+  }
+
+  if (levelValue) {
+    courses = courses.filter(course => course.level === levelValue);
+  }
+
+  if (priceValue === "under50") {
+    courses = courses.filter(course => course.price < 50);
+  } else if (priceValue === "50to80") {
+    courses = courses.filter(course => course.price >= 50 && course.price <= 80);
+  } else if (priceValue === "above80") {
+    courses = courses.filter(course => course.price > 80);
+  }
+
+  if (sortValue === "popular") {
+    courses.sort((a, b) => b.popularity - a.popularity);
+  } else if (sortValue === "price-low") {
+    courses.sort((a, b) => a.price - b.price);
+  } else if (sortValue === "price-high") {
+    courses.sort((a, b) => b.price - a.price);
+  } else if (sortValue === "title-az") {
+    courses.sort((a, b) => a.title.localeCompare(b.title));
+  }
+
+  renderCourses(courses);
+}
+
+function resetFilters() {
+  document.getElementById("searchInput").value = "";
+  document.getElementById("sortSelect").value = "popular";
+  document.getElementById("formatFilter").value = "";
+  document.getElementById("priceFilter").value = "";
+  document.getElementById("categoryFilter").value = "";
+  document.getElementById("languageFilter").value = "";
+  document.getElementById("levelFilter").value = "";
+  applyFilters();
+}
+
+document.getElementById("searchInput").addEventListener("input", applyFilters);
+document.getElementById("sortSelect").addEventListener("change", applyFilters);
+document.getElementById("formatFilter").addEventListener("change", applyFilters);
+document.getElementById("priceFilter").addEventListener("change", applyFilters);
+document.getElementById("categoryFilter").addEventListener("change", applyFilters);
+document.getElementById("languageFilter").addEventListener("change", applyFilters);
+document.getElementById("levelFilter").addEventListener("change", applyFilters);
+
+applyFilters();
+</script>
+
+</body>
+</html>
 .nav-right a {
   text-decoration: none;
   color: black;
