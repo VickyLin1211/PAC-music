@@ -126,24 +126,6 @@
       opacity: 0.7;
     }
 
-    .role-box {
-      margin: 10px 0 24px;
-    }
-
-    .role-box p {
-      margin: 0 0 10px 0;
-      font-size: 14px;
-      color: #333;
-    }
-
-    .role-options {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      font-size: 14px;
-      color: #555;
-    }
-
     .login-button {
       width: 100%;
       padding: 13px 18px;
@@ -179,6 +161,14 @@
       opacity: 0.7;
     }
 
+    .demo-info {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      line-height: 1.8;
+    }
+
     @media (max-width: 900px) {
       .brand {
         font-size: 42px;
@@ -206,8 +196,6 @@
     <div class="nav-right">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
-      <a href="students.html">Students</a>
-      <a href="teachers.html">Teachers</a>
       <a href="courses.html">Courses</a>
     </div>
   </nav>
@@ -234,40 +222,38 @@
         <a href="#">Forgot password?</a>
       </div>
 
-      <div class="role-box">
-        <p>Login as</p>
-        <div class="role-options">
-          <label><input type="radio" name="role" value="student"> Student</label>
-          <label><input type="radio" name="role" value="instructor"> Instructor</label>
-        </div>
-      </div>
-
       <button class="login-button" onclick="handleLogin()">Login</button>
 
       <div class="footer-links">
         Don’t have an account? <a href="signup.html">Create account</a><br>
         Not ready yet? <a href="index.html">Return to Home</a>
       </div>
+
+      <div class="demo-info">
+        Demo student: student@pac.com / 123456<br>
+        Demo instructor: teacher@pac.com / 123456
+      </div>
     </div>
   </div>
 
   <script>
     function handleLogin() {
-      const role = document.querySelector('input[name="role"]:checked');
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
 
-      if (!role) {
-        alert("Please select Student or Instructor");
-        return;
-      }
-
-      if (role.value === "student") {
+      if (email === "student@pac.com" && password === "123456") {
+        localStorage.setItem("userName", "Vicky");
+        localStorage.setItem("userRole", "student");
         window.location.href = "students.html";
-      } else {
+      } else if (email === "teacher@pac.com" && password === "123456") {
+        localStorage.setItem("userName", "Ryan");
+        localStorage.setItem("userRole", "instructor");
         window.location.href = "teachers.html";
+      } else {
+        alert("Invalid login. Try the demo accounts shown below.");
       }
     }
   </script>
 
 </body>
 </html>
-
