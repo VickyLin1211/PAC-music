@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <title>Login | PAC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
   <style>
     body {
       margin: 0;
@@ -56,11 +54,10 @@
     .login-card {
       max-width: 420px;
       margin: 40px auto 0;
-      background: rgba(255,255,255,0.68);
+      background: rgba(255,255,255,0.72);
       border: 1px solid rgba(0,0,0,0.05);
       border-radius: 22px;
       padding: 36px;
-      backdrop-filter: blur(12px);
       box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
 
@@ -161,26 +158,10 @@
       opacity: 0.7;
     }
 
-    .demo-info {
-      margin-top: 18px;
-      text-align: center;
-      font-size: 13px;
-      color: #777;
-      line-height: 1.8;
-    }
-
     @media (max-width: 900px) {
-      .brand {
-        font-size: 42px;
-      }
-
-      .nav-right {
-        gap: 14px;
-      }
-
-      nav {
-        padding: 20px 24px;
-      }
+      .brand { font-size: 42px; }
+      .nav-right { gap: 14px; }
+      nav { padding: 20px 24px; }
     }
   </style>
 </head>
@@ -203,9 +184,7 @@
   <div class="container">
     <div class="login-card">
       <h1>Welcome back</h1>
-      <p class="subtitle">
-        Login to continue your music journey with PAC.
-      </p>
+      <p class="subtitle">Login to continue your journey with PAC.</p>
 
       <div class="input-group">
         <label for="email">Email</label>
@@ -228,29 +207,35 @@
         Don’t have an account? <a href="signup.html">Create account</a><br>
         Not ready yet? <a href="index.html">Return to Home</a>
       </div>
-
-      <div class="demo-info">
-        Demo student: student@pac.com / 123456<br>
-        Demo instructor: teacher@pac.com / 123456
-      </div>
     </div>
   </div>
 
   <script>
     function handleLogin() {
-      const email = document.getElementById("email").value.trim();
+      const email = document.getElementById("email").value.trim().toLowerCase();
       const password = document.getElementById("password").value.trim();
 
-      if (email === "student@pac.com" && password === "123456") {
-        localStorage.setItem("userName", "Vicky");
-        localStorage.setItem("userRole", "student");
-        window.location.href = "students.html";
-      } else if (email === "teacher@pac.com" && password === "123456") {
-        localStorage.setItem("userName", "Ryan");
-        localStorage.setItem("userRole", "instructor");
-        window.location.href = "teachers.html";
+      const savedName = localStorage.getItem("userName");
+      const savedEmail = localStorage.getItem("userEmail");
+      const savedPassword = localStorage.getItem("userPassword");
+      const savedRole = localStorage.getItem("userRole");
+
+      if (!savedEmail || !savedPassword || !savedRole || !savedName) {
+        alert("No account found. Please create an account first.");
+        return;
+      }
+
+      if (email === savedEmail && password === savedPassword) {
+        localStorage.setItem("currentUserName", savedName);
+        localStorage.setItem("currentUserRole", savedRole);
+
+        if (savedRole === "student") {
+          window.location.href = "students.html";
+        } else {
+          window.location.href = "teachers.html";
+        }
       } else {
-        alert("Invalid login. Try the demo accounts shown below.");
+        alert("Invalid email or password.");
       }
     }
   </script>
