@@ -210,14 +210,14 @@
     </div>
   </div>
 
- <script>
+<script>
 function handleLogin() {
   const email = document.getElementById("email").value.trim().toLowerCase();
   const password = document.getElementById("password").value.trim();
 
   let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
 
-  const matchedAccount = accounts.find(account => 
+  const matchedAccount = accounts.find(account =>
     account.email === email && account.password === password
   );
 
