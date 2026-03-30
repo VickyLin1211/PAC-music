@@ -25,7 +25,7 @@ nav {
 .brand {
   text-align: center;
   font-family: 'Playfair Display', serif;
-  font-size: 60px;
+  font-size: 50px;
 }
 
 .nav-right {
@@ -67,84 +67,6 @@ nav {
   font-size: 18px;
   max-width: 620px;
   line-height: 1.7;
-}
-
-.search-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  margin: 30px 0 40px;
-  flex-wrap: wrap;
-}
-
-.search-box {
-  flex: 1;
-  min-width: 280px;
-}
-
-.search-box input {
-  width: 100%;
-  padding: 15px 18px;
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: rgba(255,255,255,0.68);
-  font-size: 15px;
-  font-family: 'Inter', sans-serif;
-  box-sizing: border-box;
-}
-
-.sort-box select {
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: rgba(255,255,255,0.68);
-  font-size: 14px;
-  font-family: 'Inter', sans-serif;
-}
-
-.layout {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 30px;
-}
-
-.sidebar {
-  background: rgba(255,255,255,0.58);
-  border: 1px solid rgba(0,0,0,0.05);
-  border-radius: 20px;
-  padding: 26px;
-  height: fit-content;
-  backdrop-filter: blur(10px);
-}
-
-.sidebar h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 30px;
-  margin: 0 0 20px 0;
-}
-
-.filter-group {
-  margin-bottom: 28px;
-}
-
-.filter-group h3 {
-  font-size: 15px;
-  margin: 0 0 12px 0;
-  font-weight: 600;
-}
-
-.filter-option {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-  color: #555;
-  font-size: 14px;
-}
-
-.filter-option input {
-  accent-color: black;
 }
 
 .courses-section h2 {
@@ -195,7 +117,6 @@ nav {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 18px;
 }
 
 .tag {
@@ -207,26 +128,6 @@ nav {
   color: #333;
 }
 
-.price {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  margin-bottom: 14px;
-}
-
-.button {
-  display: inline-block;
-  padding: 11px 18px;
-  border-radius: 999px;
-  background: black;
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.button:hover {
-  background: #333;
-}
-
 @media (max-width: 1100px) {
   .course-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -234,10 +135,6 @@ nav {
 }
 
 @media (max-width: 860px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-
   .course-grid {
     grid-template-columns: 1fr;
   }
@@ -265,15 +162,12 @@ nav {
 
 <nav>
   <div></div>
-
   <div class="brand">PAC</div>
-
- <div class="nav-right">
-   <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="courses.html">Courses</a>
-  <a href="login.html">Login</a>
-</div>
+  <div class="nav-right">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="login.html">Login</a>
+  </div>
 </nav>
 
 <div class="container">
@@ -281,173 +175,78 @@ nav {
   <div class="hero">
     <h1>Explore courses that fit your path.</h1>
     <p>
-      Browse music courses by category, language, level, and location. Find local or international learning opportunities designed for serious students.
+      Browse music courses across different categories, levels, and teaching styles.
     </p>
   </div>
 
-  <div class="search-row">
-    <div class="search-box">
-      <input type="text" placeholder="Search courses, teachers, or topics...">
+  <section class="courses-section">
+    <h2>Available Courses</h2>
+
+    <div class="course-grid" id="courseGrid">
+      <div class="course-card">
+        <h3>Piano Fundamentals</h3>
+        <div class="teacher">Instructor A</div>
+        <p>Build strong technique, musicality, and confidence through guided piano training.</p>
+        <div class="tags">
+          <span class="tag">Piano</span>
+          <span class="tag">Beginner</span>
+          <span class="tag">International</span>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <h3>Contemporary Voice</h3>
+        <div class="teacher">Instructor B</div>
+        <p>Train vocal technique, breath support, and stage confidence for modern performance.</p>
+        <div class="tags">
+          <span class="tag">Voice</span>
+          <span class="tag">Intermediate</span>
+          <span class="tag">Local</span>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <h3>Music Production Basics</h3>
+        <div class="teacher">Instructor C</div>
+        <p>Learn DAWs, recording, arrangement, and workflow for digital music production.</p>
+        <div class="tags">
+          <span class="tag">Production</span>
+          <span class="tag">Beginner</span>
+          <span class="tag">Online</span>
+        </div>
+      </div>
     </div>
-
-    <div class="sort-box">
-      <select>
-        <option>Sort by: Most Popular</option>
-        <option>Newest</option>
-        <option>Price: Low to High</option>
-        <option>Price: High to Low</option>
-        <option>Recommended</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="layout">
-
-    <aside class="sidebar">
-      <h2>Filters</h2>
-
-      <div class="filter-group">
-        <h3>Location</h3>
-        <label class="filter-option"><input type="checkbox"> International</label>
-        <label class="filter-option"><input type="checkbox"> Local</label>
-        <label class="filter-option"><input type="checkbox"> Online</label>
-        <label class="filter-option"><input type="checkbox"> In-person</label>
-      </div>
-
-      <div class="filter-group">
-        <h3>Category</h3>
-        <label class="filter-option"><input type="checkbox"> Piano</label>
-        <label class="filter-option"><input type="checkbox"> Voice</label>
-        <label class="filter-option"><input type="checkbox"> Composition</label>
-        <label class="filter-option"><input type="checkbox"> Music Production</label>
-        <label class="filter-option"><input type="checkbox"> Music Theory</label>
-        <label class="filter-option"><input type="checkbox"> Guitar</label>
-        <label class="filter-option"><input type="checkbox"> Violin</label>
-        <label class="filter-option"><input type="checkbox"> Drums</label>
-      </div>
-
-      <div class="filter-group">
-        <h3>Level</h3>
-        <label class="filter-option"><input type="checkbox"> Beginner</label>
-        <label class="filter-option"><input type="checkbox"> Intermediate</label>
-        <label class="filter-option"><input type="checkbox"> Advanced</label>
-      </div>
-
-      <div class="filter-group">
-        <h3>Format</h3>
-        <label class="filter-option"><input type="checkbox"> One-to-One</label>
-        <label class="filter-option"><input type="checkbox"> Group Class</label>
-        <label class="filter-option"><input type="checkbox"> Workshop</label>
-      </div>
-
-      <div class="filter-group">
-        <h3>Language</h3>
-        <label class="filter-option"><input type="checkbox"> English</label>
-        <label class="filter-option"><input type="checkbox"> Mandarin</label>
-        <label class="filter-option"><input type="checkbox"> Spanish</label>
-        <label class="filter-option"><input type="checkbox"> Bilingual</label>
-      </div>
-
-      <div class="filter-group">
-        <h3>Price</h3>
-        <label class="filter-option"><input type="checkbox"> Under $30</label>
-        <label class="filter-option"><input type="checkbox"> $30–$60</label>
-        <label class="filter-option"><input type="checkbox"> $60+</label>
-      </div>
-    </aside>
-
-    <section class="courses-section">
-      <h2>Available Courses</h2>
-
-      <div class="course-grid">
-        <div class="course-card">
-          <h3>Piano Fundamentals</h3>
-          <div class="teacher">Instructor A</div>
-          <p>Build strong technique, musicality, and confidence through guided piano training.</p>
-          <div class="tags">
-            <span class="tag">Piano</span>
-            <span class="tag">Beginner</span>
-            <span class="tag">International</span>
-            <span class="tag">English</span>
-          </div>
-          <div class="price">$45</div>
-          <a href="#" class="button">View Course</a>
-        </div>
-
-        <div class="course-card">
-          <h3>Contemporary Voice</h3>
-          <div class="teacher">Instructor B</div>
-          <p>Train vocal technique, breath support, and stage confidence for modern performance.</p>
-          <div class="tags">
-            <span class="tag">Voice</span>
-            <span class="tag">Intermediate</span>
-            <span class="tag">Local</span>
-            <span class="tag">Mandarin</span>
-          </div>
-          <div class="price">$38</div>
-          <a href="#" class="button">View Course</a>
-        </div>
-
-        <div class="course-card">
-          <h3>Music Production Basics</h3>
-          <div class="teacher">Instructor C</div>
-          <p>Learn DAWs, recording, arrangement, and workflow for digital music production.</p>
-          <div class="tags">
-            <span class="tag">Production</span>
-            <span class="tag">Beginner</span>
-            <span class="tag">Online</span>
-            <span class="tag">English</span>
-          </div>
-          <div class="price">$55</div>
-          <a href="#" class="button">View Course</a>
-        </div>
-
-        <div class="course-card">
-          <h3>Songwriting Workshop</h3>
-          <div class="teacher">Instructor D</div>
-          <p>Explore lyric writing, melody building, and composition through creative weekly exercises.</p>
-          <div class="tags">
-            <span class="tag">Composition</span>
-            <span class="tag">Workshop</span>
-            <span class="tag">Bilingual</span>
-          </div>
-          <div class="price">$42</div>
-          <a href="#" class="button">View Course</a>
-        </div>
-
-        <div class="course-card">
-          <h3>Jazz Improvisation</h3>
-          <div class="teacher">Instructor E</div>
-          <p>Develop phrasing, harmony awareness, and improvisational confidence in jazz settings.</p>
-          <div class="tags">
-            <span class="tag">Jazz</span>
-            <span class="tag">Advanced</span>
-            <span class="tag">International</span>
-            <span class="tag">English</span>
-          </div>
-          <div class="price">$68</div>
-          <a href="#" class="button">View Course</a>
-        </div>
-
-        <div class="course-card">
-          <h3>Film Scoring</h3>
-          <div class="teacher">Instructor F</div>
-          <p>Learn how to write music for visual storytelling with cinematic structure and emotion.</p>
-          <div class="tags">
-            <span class="tag">Film Scoring</span>
-            <span class="tag">Advanced</span>
-            <span class="tag">Online</span>
-            <span class="tag">Spanish</span>
-          </div>
-          <div class="price">$72</div>
-          <a href="#" class="button">View Course</a>
-        </div>
-      </div>
-    </section>
-
-  </div>
+  </section>
 
 </div>
+
+<script>
+function getCustomCourses() {
+  return JSON.parse(localStorage.getItem("customCourses")) || [];
+}
+
+function renderCustomCourses() {
+  const grid = document.getElementById("courseGrid");
+  const customCourses = getCustomCourses();
+
+  const customCards = customCourses.map(course => `
+    <div class="course-card">
+      <h3>${course.title}</h3>
+      <div class="teacher">${course.teacher}</div>
+      <p>${course.description}</p>
+      <div class="tags">
+        <span class="tag">${course.level}</span>
+        <span class="tag">${course.format}</span>
+        <span class="tag">${course.price}</span>
+      </div>
+    </div>
+  `).join("");
+
+  grid.innerHTML += customCards;
+}
+
+renderCustomCourses();
+</script>
 
 </body>
 </html>
