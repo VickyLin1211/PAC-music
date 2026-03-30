@@ -41,6 +41,10 @@ nav {
   font-size: 14px;
 }
 
+.nav-right a:hover {
+  opacity: 0.6;
+}
+
 /* CONTAINER */
 .container {
   max-width: 1100px;
@@ -58,6 +62,7 @@ nav {
 .hero p {
   color: #555;
   font-size: 18px;
+  margin-bottom: 0;
 }
 
 /* SECTION */
@@ -99,6 +104,7 @@ nav {
 .card p {
   color: #666;
   font-size: 14px;
+  line-height: 1.7;
 }
 
 /* LESSON BOX */
@@ -107,6 +113,7 @@ nav {
   padding: 30px;
   border-radius: 18px;
   max-width: 600px;
+  border: 1px solid rgba(0,0,0,0.05);
 }
 
 .lesson-box p {
@@ -126,6 +133,7 @@ nav {
   padding: 26px;
   border-radius: 18px;
   text-align: center;
+  border: 1px solid rgba(0,0,0,0.05);
 }
 
 .amount {
@@ -149,6 +157,19 @@ nav {
   background: #333;
 }
 
+/* LOGOUT */
+.logout {
+  margin-top: 36px;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  color: #444;
+}
+
+.logout:hover {
+  opacity: 0.6;
+}
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .cards {
@@ -162,6 +183,19 @@ nav {
   .container {
     padding: 60px 24px;
   }
+
+  .hero h1 {
+    font-size: 50px;
+  }
+
+  .brand {
+    font-size: 42px;
+  }
+
+  .nav-right {
+    gap: 14px;
+    flex-wrap: wrap;
+  }
 }
 </style>
 </head>
@@ -169,18 +203,19 @@ nav {
 <body>
 
 <nav>
+  <div></div>
+  <div class="brand">PAC</div>
   <div class="nav-right">
-  <a href="about.html">About</a>
-  <a href="courses.html">Courses</a>
-  <a href="login.html">Login</a>
-</div>
+    <a href="courses.html">Courses</a>
+    <a href="index.html">Home</a>
+  </div>
 </nav>
 
 <div class="container">
 
   <!-- HERO -->
   <div class="hero">
-    <h1>Welcome back, Instructor</h1>
+    <h1 id="welcomeText">Welcome back</h1>
     <p>Manage your students, courses, and teaching schedule.</p>
   </div>
 
@@ -263,7 +298,23 @@ nav {
     <a href="#" class="cta">+ Create New Course</a>
   </div>
 
+  <!-- LOGOUT -->
+  <div class="logout" onclick="logout()">Logout</div>
+
 </div>
+
+<script>
+const name = localStorage.getItem("userName");
+
+if (name) {
+  document.getElementById("welcomeText").innerText = "Welcome back, " + name;
+}
+
+function logout() {
+  localStorage.clear();
+  window.location.href = "index.html";
+}
+</script>
 
 </body>
 </html>
