@@ -212,7 +212,7 @@ nav {
 
 .price {
   font-family: 'Playfair Display', serif;
-  font-size: 26px;
+  font-size: 24px;
   white-space: nowrap;
 }
 
@@ -308,7 +308,7 @@ nav {
   <div class="nav-right">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
-    <a href="login.html">Login</a>
+    <a href="#" onclick="goToLoginOrDashboard()">Login</a>
   </div>
 </nav>
 
@@ -355,9 +355,9 @@ nav {
         <label for="priceFilter">Price</label>
         <select id="priceFilter">
           <option value="">All Prices</option>
-          <option value="under50">Under $50</option>
-          <option value="50to80">$50–$80</option>
-          <option value="above80">Above $80</option>
+          <option value="under40">Under $40</option>
+          <option value="40to60">$40–$60</option>
+          <option value="above60">Above $60</option>
         </select>
       </div>
 
@@ -419,6 +419,29 @@ nav {
 </div>
 
 <script>
+function getCurrentUser() {
+  return {
+    name: localStorage.getItem("currentUserName"),
+    role: localStorage.getItem("currentUserRole"),
+    email: localStorage.getItem("currentUserEmail")
+  };
+}
+
+function goToLoginOrDashboard() {
+  const user = getCurrentUser();
+
+  if (!user.role) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  if (user.role === "student") {
+    window.location.href = "students.html";
+  } else {
+    window.location.href = "teachers.html";
+  }
+}
+
 const defaultCourses = [
   {
     title: "Piano Fundamentals",
@@ -428,7 +451,7 @@ const defaultCourses = [
     level: "Beginner",
     format: "Online",
     language: "English",
-    price: 45,
+    price: 35,
     popularity: 95
   },
   {
@@ -439,7 +462,7 @@ const defaultCourses = [
     level: "Intermediate",
     format: "In-person",
     language: "Mandarin",
-    price: 38,
+    price: 42,
     popularity: 88
   },
   {
@@ -450,7 +473,7 @@ const defaultCourses = [
     level: "Beginner",
     format: "Online",
     language: "English",
-    price: 55,
+    price: 48,
     popularity: 93
   },
   {
@@ -461,7 +484,7 @@ const defaultCourses = [
     level: "Intermediate",
     format: "Hybrid",
     language: "English",
-    price: 42,
+    price: 40,
     popularity: 91
   },
   {
@@ -472,7 +495,7 @@ const defaultCourses = [
     level: "Advanced",
     format: "Online",
     language: "English",
-    price: 68,
+    price: 55,
     popularity: 86
   },
   {
@@ -483,7 +506,7 @@ const defaultCourses = [
     level: "Advanced",
     format: "Online",
     language: "Spanish",
-    price: 72,
+    price: 58,
     popularity: 84
   },
   {
@@ -494,7 +517,7 @@ const defaultCourses = [
     level: "Beginner",
     format: "In-person",
     language: "English",
-    price: 48,
+    price: 36,
     popularity: 82
   },
   {
@@ -505,7 +528,7 @@ const defaultCourses = [
     level: "Intermediate",
     format: "Hybrid",
     language: "Mandarin",
-    price: 76,
+    price: 52,
     popularity: 80
   },
   {
@@ -516,7 +539,7 @@ const defaultCourses = [
     level: "Intermediate",
     format: "In-person",
     language: "Spanish",
-    price: 58,
+    price: 44,
     popularity: 79
   },
   {
@@ -527,7 +550,7 @@ const defaultCourses = [
     level: "Advanced",
     format: "Hybrid",
     language: "English",
-    price: 92,
+    price: 60,
     popularity: 77
   },
   {
@@ -538,7 +561,7 @@ const defaultCourses = [
     level: "Beginner",
     format: "Online",
     language: "Mandarin",
-    price: 50,
+    price: 39,
     popularity: 74
   },
   {
@@ -549,28 +572,13 @@ const defaultCourses = [
     level: "Advanced",
     format: "Online",
     language: "English",
-    price: 83,
+    price: 57,
     popularity: 76
   }
 ];
 
 function getCustomCourses() {
   return JSON.parse(localStorage.getItem("customCourses")) || [];
-}
-
-function mapCustomCourses() {
-  const customCourses = getCustomCourses();
-  return customCourses.map(course => ({
-    title: course.title,
-    teacher: course.teacher || "Instructor",
-    description: course.description,
-    category: inferCategory(course.title),
-    level: course.level,
-    format: course.format,
-    language: "English",
-    price: parsePrice(course.price),
-    popularity: 70
-  }));
 }
 
 function parsePrice(priceValue) {
@@ -589,6 +597,21 @@ function inferCategory(title) {
   if (t.includes("jazz")) return "Jazz";
   if (t.includes("production")) return "Production";
   return "Composition";
+}
+
+function mapCustomCourses() {
+  const customCourses = getCustomCourses();
+  return customCourses.map(course => ({
+    title: course.title,
+    teacher: course.teacher || "Instructor",
+    description: course.description,
+    category: inferCategory(course.title),
+    level: course.level,
+    format: course.format,
+    language: course.language || "English",
+    price: parsePrice(course.price),
+    popularity: 70
+  }));
 }
 
 function getAllCourses() {
@@ -667,12 +690,12 @@ function applyFilters() {
     courses = courses.filter(course => course.level === levelValue);
   }
 
-  if (priceValue === "under50") {
-    courses = courses.filter(course => course.price < 50);
-  } else if (priceValue === "50to80") {
-    courses = courses.filter(course => course.price >= 50 && course.price <= 80);
-  } else if (priceValue === "above80") {
-    courses = courses.filter(course => course.price > 80);
+  if (priceValue === "under40") {
+    courses = courses.filter(course => course.price < 40);
+  } else if (priceValue === "40to60") {
+    courses = courses.filter(course => course.price >= 40 && course.price <= 60);
+  } else if (priceValue === "above60") {
+    courses = courses.filter(course => course.price > 60);
   }
 
   if (sortValue === "popular") {
@@ -708,221 +731,6 @@ document.getElementById("languageFilter").addEventListener("change", applyFilter
 document.getElementById("levelFilter").addEventListener("change", applyFilters);
 
 applyFilters();
-</script>
-
-</body>
-</html>
-.nav-right a {
-  text-decoration: none;
-  color: black;
-  font-size: 14px;
-}
-
-.nav-right a:hover {
-  opacity: 0.6;
-}
-
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 70px 50px 100px;
-}
-
-.hero {
-  margin-bottom: 40px;
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 68px;
-  margin-bottom: 14px;
-  line-height: 1.05;
-}
-
-.hero p {
-  color: #555;
-  font-size: 18px;
-  max-width: 620px;
-  line-height: 1.7;
-}
-
-.courses-section h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 38px;
-  margin: 0 0 22px 0;
-}
-
-.course-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.course-card {
-  background: rgba(255,255,255,0.68);
-  border: 1px solid rgba(0,0,0,0.05);
-  border-radius: 18px;
-  padding: 26px;
-  backdrop-filter: blur(12px);
-  transition: all 0.25s ease;
-}
-
-.course-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-}
-
-.course-card h3 {
-  margin: 0 0 10px 0;
-  font-size: 22px;
-}
-
-.teacher {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 14px;
-}
-
-.course-card p {
-  color: #555;
-  font-size: 14px;
-  line-height: 1.7;
-  margin-bottom: 18px;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.tag {
-  display: inline-block;
-  font-size: 12px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: #ede8dc;
-  color: #333;
-}
-
-@media (max-width: 1100px) {
-  .course-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 860px) {
-  .course-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .container {
-    padding: 50px 24px 90px;
-  }
-
-  .hero h1 {
-    font-size: 50px;
-  }
-
-  .brand {
-    font-size: 42px;
-  }
-
-  .nav-right {
-    gap: 14px;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<nav>
-  <div></div>
-  <div class="brand">PAC</div>
-  <div class="nav-right">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="login.html">Login</a>
-  </div>
-</nav>
-
-<div class="container">
-
-  <div class="hero">
-    <h1>Explore courses that fit your path.</h1>
-    <p>
-      Browse music courses across different categories, levels, and teaching styles.
-    </p>
-  </div>
-
-  <section class="courses-section">
-    <h2>Available Courses</h2>
-
-    <div class="course-grid" id="courseGrid">
-      <div class="course-card">
-        <h3>Piano Fundamentals</h3>
-        <div class="teacher">Instructor A</div>
-        <p>Build strong technique, musicality, and confidence through guided piano training.</p>
-        <div class="tags">
-          <span class="tag">Piano</span>
-          <span class="tag">Beginner</span>
-          <span class="tag">International</span>
-        </div>
-      </div>
-
-      <div class="course-card">
-        <h3>Contemporary Voice</h3>
-        <div class="teacher">Instructor B</div>
-        <p>Train vocal technique, breath support, and stage confidence for modern performance.</p>
-        <div class="tags">
-          <span class="tag">Voice</span>
-          <span class="tag">Intermediate</span>
-          <span class="tag">Local</span>
-        </div>
-      </div>
-
-      <div class="course-card">
-        <h3>Music Production Basics</h3>
-        <div class="teacher">Instructor C</div>
-        <p>Learn DAWs, recording, arrangement, and workflow for digital music production.</p>
-        <div class="tags">
-          <span class="tag">Production</span>
-          <span class="tag">Beginner</span>
-          <span class="tag">Online</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<script>
-function getCustomCourses() {
-  return JSON.parse(localStorage.getItem("customCourses")) || [];
-}
-
-function renderCustomCourses() {
-  const grid = document.getElementById("courseGrid");
-  const customCourses = getCustomCourses();
-
-  const customCards = customCourses.map(course => `
-    <div class="course-card">
-      <h3>${course.title}</h3>
-      <div class="teacher">${course.teacher}</div>
-      <p>${course.description}</p>
-      <div class="tags">
-        <span class="tag">${course.level}</span>
-        <span class="tag">${course.format}</span>
-        <span class="tag">${course.price}</span>
-      </div>
-    </div>
-  `).join("");
-
-  grid.innerHTML += customCards;
-}
-
-renderCustomCourses();
 </script>
 
 </body>
