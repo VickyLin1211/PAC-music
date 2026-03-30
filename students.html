@@ -15,6 +15,7 @@ body {
   color: #111;
 }
 
+/* NAV */
 nav {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -44,144 +45,51 @@ nav {
   opacity: 0.6;
 }
 
+/* MAIN */
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 80px 60px 120px;
+  padding: 60px 24px;
 }
 
-.hero {
-  margin-bottom: 70px;
-}
-
-.hero h1 {
+h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 68px;
-  line-height: 1.05;
-  margin-bottom: 16px;
+  font-size: 44px;
+  margin-bottom: 10px;
 }
 
-.hero p {
-  font-size: 18px;
-  color: #555;
-  max-width: 560px;
-  line-height: 1.7;
+.subtitle {
+  color: #666;
+  margin-bottom: 30px;
 }
 
-.section {
-  margin-top: 70px;
-}
-
-.section h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 38px;
-  margin-bottom: 22px;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
+/* CARD */
 .card {
-  background: rgba(255,255,255,0.62);
-  border: 1px solid rgba(0,0,0,0.05);
-  border-radius: 18px;
-  padding: 28px;
-  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.7);
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 20px;
 }
 
 .card h3 {
-  margin: 0 0 12px 0;
-  font-size: 20px;
+  margin: 0 0 10px;
 }
 
 .card p {
-  margin: 0;
-  color: #666;
-  line-height: 1.7;
-  font-size: 15px;
-}
-
-.status {
-  display: inline-block;
-  margin-top: 18px;
-  font-size: 13px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: #111;
-  color: white;
-}
-
-.status.light {
-  background: #e9e4d8;
-  color: #333;
-}
-
-.lesson-box {
-  background: rgba(255,255,255,0.62);
-  border: 1px solid rgba(0,0,0,0.05);
-  border-radius: 18px;
-  padding: 30px;
-  max-width: 700px;
-}
-
-.lesson-box p {
-  margin: 10px 0 0 0;
   color: #555;
-  line-height: 1.7;
-}
-
-.progress-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-  max-width: 800px;
-}
-
-.progress-card {
-  background: rgba(255,255,255,0.62);
-  border: 1px solid rgba(0,0,0,0.05);
-  border-radius: 18px;
-  padding: 26px;
-  text-align: center;
-}
-
-.progress-number {
-  font-family: 'Playfair Display', serif;
-  font-size: 42px;
-  margin-bottom: 8px;
-}
-
-.progress-label {
-  color: #666;
   font-size: 14px;
 }
 
-@media (max-width: 900px) {
-  .cards,
-  .progress-grid {
-    grid-template-columns: 1fr;
-  }
+.logout {
+  margin-top: 30px;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  color: #444;
+}
 
-  .container {
-    padding: 60px 24px 100px;
-  }
-
-  .hero h1 {
-    font-size: 50px;
-  }
-
-  .brand {
-    font-size: 42px;
-  }
-
-  .nav-right {
-    gap: 14px;
-    font-size: 12px;
-    flex-wrap: wrap;
-  }
+.logout:hover {
+  opacity: 0.6;
 }
 </style>
 </head>
@@ -193,100 +101,55 @@ nav {
 
   <div class="brand">PAC</div>
 
-<div class="nav-right">
-  <a href="about.html">About</a>
-  <a href="courses.html">Courses</a>
-  <a href="login.html">Login</a>
-</div>
+  <div class="nav-right">
+    <a href="courses.html">Courses</a>
+    <a href="index.html">Home</a>
+  </div>
 </nav>
 
 <div class="container">
 
-  <div class="hero">
-  <h1>Welcome back, Student</h1>
-  <p>Track your courses, upcoming lessons, and learning progress.</p>
+  <!-- 🔥 Welcome text -->
+  <h1 id="welcomeText">Welcome back</h1>
+
+  <p class="subtitle">
+    Continue your learning journey on PAC.
+  </p>
+
+  <div class="card">
+    <h3>Your Courses</h3>
+    <p>Browse and continue your enrolled courses.</p>
+  </div>
+
+  <div class="card">
+    <h3>Recommended</h3>
+    <p>Explore new courses based on your interests.</p>
+  </div>
+
+  <div class="card">
+    <h3>Your Progress</h3>
+    <p>Track your learning and stay consistent.</p>
+  </div>
+
+  <!-- Logout -->
+  <div class="logout" onclick="logout()">Logout</div>
+
 </div>
 
-  <div class="section">
-    <h2>My Courses</h2>
+<script>
+// 🔥 顯示名字
+const name = localStorage.getItem("userName");
 
-    <div class="cards">
-      <div class="card">
-        <h3>Piano Fundamentals</h3>
-        <p>Develop technique, musicality, and confidence through guided classical and contemporary training.</p>
-        <span class="status">In Progress</span>
-      </div>
+if (name) {
+  document.getElementById("welcomeText").innerText = "Welcome back, " + name;
+}
 
-      <div class="card">
-        <h3>Music Production Basics</h3>
-        <p>Learn the foundations of DAWs, recording, arrangement, and digital music workflow.</p>
-        <span class="status light">Not Started</span>
-      </div>
-
-      <div class="card">
-        <h3>Composition Workshop</h3>
-        <p>Strengthen your songwriting, harmony, and creative voice through hands-on projects.</p>
-        <span class="status light">Completed</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>Explore Courses</h2>
-
-    <div class="cards">
-      <div class="card">
-        <h3>Piano</h3>
-        <p>Classical, jazz, and contemporary lessons tailored to your level and goals.</p>
-      </div>
-
-      <div class="card">
-        <h3>Composition</h3>
-        <p>Write, arrange, and shape original music with structured feedback.</p>
-      </div>
-
-      <div class="card">
-        <h3>Music Production</h3>
-        <p>Learn recording, mixing, and digital production with practical real-world tools.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>Upcoming Lesson</h2>
-
-    <div class="lesson-box">
-      <h3 style="margin:0;">Piano Lesson with Instructor A</h3>
-      <p>March 25, 7:00 PM</p>
-      <p>
-        Continue your current learning path with one-to-one mentorship focused on technique, interpretation, and repertoire development.
-      </p>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>Your Progress</h2>
-
-    <div class="progress-grid">
-      <div class="progress-card">
-        <div class="progress-number">3</div>
-        <div class="progress-label">Courses Joined</div>
-      </div>
-
-      <div class="progress-card">
-        <div class="progress-number">1</div>
-        <div class="progress-label">Completed</div>
-      </div>
-
-      <div class="progress-card">
-        <div class="progress-number">2</div>
-        <div class="progress-label">In Progress</div>
-      </div>
-    </div>
-  </div>
-
-</div>
+// 🔥 logout 功能
+function logout() {
+  localStorage.clear();
+  window.location.href = "index.html";
+}
+</script>
 
 </body>
 </html>
-
