@@ -69,11 +69,13 @@ nav {
 }
 
 .subtitle {
-  color: #666;
-  margin: 18px auto 0;
-  font-size: 17px;
-  line-height: 1.7;
-  max-width: 760px;
+  color: #6f6a62;
+  margin: 20px auto 0;
+  font-size: 18px;
+  line-height: 1.75;
+  max-width: 620px;
+  text-align: center;
+}
 }
 
 .hero-actions {
@@ -143,10 +145,10 @@ nav {
 .scroll-row {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 360px;
+  grid-auto-columns: 350px;
   gap: 18px;
   overflow-x: auto;
-  padding-bottom: 8px;
+  padding-bottom: 12px;
   scroll-snap-type: x mandatory;
 }
 
@@ -163,6 +165,7 @@ nav {
   background: transparent;
 }
 
+/* CARD */
 .card {
   scroll-snap-align: start;
   background: rgba(255,255,255,0.72);
@@ -170,14 +173,24 @@ nav {
   border-radius: 24px;
   padding: 28px;
   box-sizing: border-box;
-  min-height: 220px;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 28px rgba(0,0,0,0.04);
   transition: 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .card:hover {
   transform: translateY(-4px);
+}
+
+.info-card {
+  min-height: 310px;
+}
+
+.course-card {
+  min-height: 285px;
 }
 
 .card-label {
@@ -188,13 +201,14 @@ nav {
   font-size: 12px;
   background: #ede7d8;
   color: #333;
+  align-self: flex-start;
 }
 
 .card h3 {
   font-family: 'Playfair Display', serif;
   font-size: 30px;
   margin: 0 0 12px;
-  line-height: 1.1;
+  line-height: 1.08;
 }
 
 .card p {
@@ -205,6 +219,7 @@ nav {
 }
 
 .card-link {
+  margin-top: auto;
   text-decoration: none;
   color: black;
   font-size: 14px;
@@ -221,7 +236,7 @@ nav {
 }
 
 .course-meta {
-  margin-top: 14px;
+  margin-top: auto;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -331,8 +346,8 @@ nav {
   </h1>
 
   <p class="subtitle">
-    Connecting serious music students with international teachers, structured learning, and real creative opportunities.
-  </p>
+  A global platform for serious music students to learn, grow, and connect beyond borders.
+</p>
 
   <div class="hero-actions">
     <a class="button primary" href="login.html">Get Started</a>
@@ -348,31 +363,39 @@ nav {
   </div>
 
   <div class="scroll-row">
-    <div class="card">
+    <div class="card info-card">
       <div class="card-label">Global Access</div>
       <h3>Learn from international instructors</h3>
-      <p>
-        Discover teachers beyond your local environment and gain perspectives that feel broader, more current, and more globally connected.
-      </p>
+      <p>Discover teachers beyond your local environment and gain perspectives that feel broader, more current, and more globally connected.</p>
       <a class="card-link" href="courses.html">Explore learning →</a>
     </div>
 
-    <div class="card">
+    <div class="card info-card">
       <div class="card-label">Structured Growth</div>
       <h3>Build a clearer path in music</h3>
-      <p>
-        Move through courses with more direction, consistency, and clarity instead of feeling lost after years of training.
-      </p>
+      <p>Move through courses with more direction, consistency, and clarity instead of feeling lost after years of training.</p>
       <a class="card-link" href="login.html">Start your path →</a>
     </div>
 
-    <div class="card">
+    <div class="card info-card">
       <div class="card-label">Progress Tracking</div>
       <h3>See your learning in one place</h3>
-      <p>
-        Manage courses, upcoming lessons, and personal progress through a student-centered experience designed to feel simple and motivating.
-      </p>
+      <p>Manage courses, upcoming lessons, and personal progress through a student-centered experience designed to feel simple and motivating.</p>
       <a class="card-link" href="students.html">View student flow →</a>
+    </div>
+
+    <div class="card info-card">
+      <div class="card-label">Flexible Learning</div>
+      <h3>Learn at your own pace</h3>
+      <p>Choose courses based on your level, interests, and goals, whether you want to focus on fundamentals or more advanced creative work.</p>
+      <a class="card-link" href="courses.html">Find your fit →</a>
+    </div>
+
+    <div class="card info-card">
+      <div class="card-label">Real Opportunities</div>
+      <h3>Connect learning with the real world</h3>
+      <p>Use PAC not only to study, but also to build confidence, creative direction, and a stronger long-term path in music.</p>
+      <a class="card-link" href="about.html">See the vision →</a>
     </div>
   </div>
 </div>
@@ -385,31 +408,39 @@ nav {
   </div>
 
   <div class="scroll-row">
-    <div class="card">
+    <div class="card info-card">
       <div class="card-label">Independent Teaching</div>
       <h3>Create flexible teaching opportunities</h3>
-      <p>
-        Reach serious students beyond one city or one institution and build a teaching presence that feels more global and self-directed.
-      </p>
+      <p>Reach serious students beyond one city or one institution and build a teaching presence that feels more global and self-directed.</p>
       <a class="card-link" href="login.html">Start teaching →</a>
     </div>
 
-    <div class="card">
+    <div class="card info-card">
       <div class="card-label">Course Management</div>
       <h3>Organize lessons with clarity</h3>
-      <p>
-        Manage students, courses, schedules, and learning flow through a cleaner instructor dashboard built for music education.
-      </p>
+      <p>Manage students, courses, schedules, and learning flow through a cleaner instructor dashboard built for music education.</p>
       <a class="card-link" href="teachers.html">View instructor flow →</a>
     </div>
 
-    <div class="card">
+    <div class="card info-card">
       <div class="card-label">Global Reach</div>
       <h3>Teach across borders</h3>
-      <p>
-        Share your expertise with students in different regions and become part of a more connected creative education ecosystem.
-      </p>
-      <a class="card-link" href="courses.html">See the platform →</a>
+      <p>Share your expertise with students in different regions and become part of a more connected creative education ecosystem.</p>
+      <a class="card-link" href="about.html">See the platform →</a>
+    </div>
+
+    <div class="card info-card">
+      <div class="card-label">Sustainable Teaching</div>
+      <h3>Build a more independent income stream</h3>
+      <p>Create courses, manage your offerings, and develop a teaching model that feels more flexible than traditional institutional structures.</p>
+      <a class="card-link" href="teachers.html">See teacher dashboard →</a>
+    </div>
+
+    <div class="card info-card">
+      <div class="card-label">Creative Visibility</div>
+      <h3>Show what makes your teaching unique</h3>
+      <p>Present your strengths, style, and teaching focus in a way that helps the right students find and connect with you.</p>
+      <a class="card-link" href="login.html">Build your profile →</a>
     </div>
   </div>
 </div>
@@ -425,9 +456,7 @@ nav {
     <div class="card course-card">
       <div class="card-label">Featured</div>
       <h3>Piano Fundamentals</h3>
-      <p>
-        Build strong technique, musical awareness, and confidence through a guided piano experience designed for serious growth.
-      </p>
+      <p>Build strong technique, musical awareness, and confidence through a guided piano experience designed for serious growth.</p>
       <div class="course-meta">
         <span class="tag">Piano</span>
         <span class="tag">Beginner</span>
@@ -438,9 +467,7 @@ nav {
     <div class="card course-card">
       <div class="card-label">Featured</div>
       <h3>Music Production</h3>
-      <p>
-        Learn recording, arrangement, and digital workflow in a way that feels practical, contemporary, and creatively useful.
-      </p>
+      <p>Learn recording, arrangement, and digital workflow in a way that feels practical, contemporary, and creatively useful.</p>
       <div class="course-meta">
         <span class="tag">Production</span>
         <span class="tag">Digital</span>
@@ -451,9 +478,7 @@ nav {
     <div class="card course-card">
       <div class="card-label">Featured</div>
       <h3>Songwriting</h3>
-      <p>
-        Explore melody, lyrics, and composition through a more structured process that supports creative identity and consistency.
-      </p>
+      <p>Explore melody, lyrics, and composition through a more structured process that supports creative identity and consistency.</p>
       <div class="course-meta">
         <span class="tag">Composition</span>
         <span class="tag">Creative</span>
@@ -464,13 +489,22 @@ nav {
     <div class="card course-card">
       <div class="card-label">Featured</div>
       <h3>Voice & Performance</h3>
-      <p>
-        Develop vocal control, confidence, and stage presence through a performance-based learning experience.
-      </p>
+      <p>Develop vocal control, confidence, and stage presence through a performance-based learning experience.</p>
       <div class="course-meta">
         <span class="tag">Voice</span>
         <span class="tag">Performance</span>
         <span class="tag">Advanced</span>
+      </div>
+    </div>
+
+    <div class="card course-card">
+      <div class="card-label">Featured</div>
+      <h3>Composition Lab</h3>
+      <p>Strengthen your musical language, harmony, and originality through guided composition work and feedback.</p>
+      <div class="course-meta">
+        <span class="tag">Composition</span>
+        <span class="tag">Writing</span>
+        <span class="tag">Studio</span>
       </div>
     </div>
   </div>
