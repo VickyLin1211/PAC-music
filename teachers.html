@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Student Dashboard | PAC</title>
+<title>Teacher Dashboard | PAC</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -27,6 +27,7 @@ nav {
   text-align: center;
   font-family: 'Playfair Display', serif;
   font-size: 50px;
+  line-height: 1;
 }
 
 .nav-right {
@@ -39,6 +40,10 @@ nav {
   text-decoration: none;
   color: black;
   font-size: 14px;
+}
+
+.nav-right a:hover {
+  opacity: 0.6;
 }
 
 /* CONTAINER */
@@ -56,12 +61,17 @@ nav {
 .hero h1 {
   font-family: 'Playfair Display', serif;
   font-size: 52px;
-  margin: 0 0 8px;
+  margin: 0 0 10px;
+  line-height: 1.08;
+  max-width: 900px;
 }
 
 .hero-sub {
   color: #666;
   font-size: 16px;
+  line-height: 1.7;
+  max-width: 640px;
+  margin: 0;
 }
 
 /* SECTION */
@@ -84,57 +94,122 @@ nav {
 
 .card {
   background: rgba(255,255,255,0.72);
-  border-radius: 18px;
+  border-radius: 20px;
   padding: 22px;
   border: 1px solid rgba(0,0,0,0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.04);
 }
 
 .card h3 {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
+  font-size: 18px;
 }
 
 .card p {
   font-size: 14px;
   color: #666;
   margin: 0;
+  line-height: 1.7;
 }
 
-/* PROGRESS BAR */
-.progress {
-  margin-top: 10px;
-  height: 6px;
-  background: #eee;
-  border-radius: 999px;
-  overflow: hidden;
+/* UPCOMING */
+.lesson-card {
+  max-width: 520px;
 }
 
-.progress-bar {
-  height: 100%;
-  background: black;
+/* EARNINGS */
+.earnings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
 }
 
-/* CTA */
+.earning-card {
+  background: rgba(255,255,255,0.72);
+  border-radius: 20px;
+  padding: 26px;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+}
+
+.amount {
+  font-size: 38px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 8px;
+}
+
+.label {
+  font-size: 14px;
+  color: #666;
+}
+
+.fee-note {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.8;
+  max-width: 720px;
+}
+
+/* BUTTON */
+.actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .cta {
-  margin-top: 20px;
   display: inline-block;
   padding: 12px 20px;
   border-radius: 999px;
   background: black;
   color: white;
   text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.cta:hover {
+  background: #333;
 }
 
 .logout {
-  margin-top: 30px;
   font-size: 14px;
   cursor: pointer;
   color: #555;
 }
 
+.logout:hover {
+  opacity: 0.6;
+}
+
 /* MOBILE */
 @media (max-width: 900px) {
-  .cards {
+  .cards,
+  .earnings {
     grid-template-columns: 1fr;
+  }
+
+  nav {
+    padding: 20px 24px;
+  }
+
+  .brand {
+    font-size: 40px;
+  }
+
+  .nav-right {
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .hero h1 {
+    font-size: 42px;
   }
 }
 </style>
@@ -156,76 +231,90 @@ nav {
   <!-- HERO -->
   <div class="hero">
     <h1 id="welcomeText"></h1>
-    <p class="hero-sub">Track your learning and grow your music skills.</p>
+    <p class="hero-sub">Welcome back to your teaching space. Manage students, courses, and earnings in one place.</p>
   </div>
 
-  <!-- CURRENT COURSES -->
+  <!-- STUDENTS -->
   <div class="section">
-    <h2>My Courses</h2>
+    <h2>Students</h2>
     <div class="cards">
+      <div class="card">
+        <h3>Vicky Lin</h3>
+        <p>Piano Fundamentals · Lesson 3</p>
+      </div>
 
       <div class="card">
+        <h3>Jason Chen</h3>
+        <p>Music Production · Lesson 1</p>
+      </div>
+
+      <div class="card">
+        <h3>Emily Wang</h3>
+        <p>Composition Workshop · Lesson 5</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COURSES -->
+  <div class="section">
+    <h2>Courses</h2>
+    <div class="cards">
+      <div class="card">
         <h3>Piano Fundamentals</h3>
-        <p>Lesson 3 of 10</p>
-        <div class="progress">
-          <div class="progress-bar" style="width: 30%"></div>
-        </div>
+        <p>12 students enrolled</p>
+      </div>
+
+      <div class="card">
+        <h3>Composition Workshop</h3>
+        <p>8 students enrolled</p>
       </div>
 
       <div class="card">
         <h3>Music Production</h3>
-        <p>Lesson 1 of 8</p>
-        <div class="progress">
-          <div class="progress-bar" style="width: 12%"></div>
-        </div>
+        <p>10 students enrolled</p>
       </div>
-
-      <div class="card">
-        <h3>Songwriting</h3>
-        <p>Lesson 5 of 12</p>
-        <div class="progress">
-          <div class="progress-bar" style="width: 40%"></div>
-        </div>
-      </div>
-
     </div>
   </div>
 
-  <!-- UPCOMING -->
+  <!-- UPCOMING LESSON -->
   <div class="section">
     <h2>Upcoming Lesson</h2>
-    <div class="card">
-      <h3>Piano Lesson</h3>
+    <div class="card lesson-card">
+      <h3>Piano Lesson with Vicky Lin</h3>
       <p>March 25 · 7:00 PM</p>
     </div>
   </div>
 
-  <!-- RECOMMENDED -->
+  <!-- EARNINGS -->
   <div class="section">
-    <h2>Recommended for You</h2>
-    <div class="cards">
+    <h2>Earnings</h2>
 
-      <div class="card">
-        <h3>Composition Lab</h3>
-        <p>Develop your musical ideas and creativity.</p>
+    <div class="earnings">
+      <div class="earning-card">
+        <div class="amount">$1,240</div>
+        <div class="label">Total Revenue</div>
       </div>
 
-      <div class="card">
-        <h3>Voice Training</h3>
-        <p>Improve vocal control and performance.</p>
+      <div class="earning-card">
+        <div class="amount">$186</div>
+        <div class="label">PAC Fee (15%)</div>
       </div>
 
-      <div class="card">
-        <h3>Jazz Improvisation</h3>
-        <p>Explore creativity through improvisation.</p>
+      <div class="earning-card">
+        <div class="amount">$1,054</div>
+        <div class="label">Your Earnings</div>
       </div>
-
     </div>
+
+    <p class="fee-note">
+      PAC takes a 15% platform fee to support payments, student matching, course management, and platform operations.
+    </p>
   </div>
 
-  <a href="courses.html" class="cta">Browse More Courses</a>
-
-  <div class="logout" onclick="logout()">Logout</div>
+  <div class="actions">
+    <a href="#" class="cta">+ Create Course</a>
+    <div class="logout" onclick="logout()">Logout</div>
+  </div>
 
 </div>
 
@@ -233,13 +322,15 @@ nav {
 const name = localStorage.getItem("currentUserName");
 
 if (name) {
-  document.getElementById("welcomeText").innerText = "Welcome, " + name;
+  document.getElementById("welcomeText").innerText = "Welcome back, " + name + ".";
 } else {
-  document.getElementById("welcomeText").innerText = "Student Dashboard";
+  document.getElementById("welcomeText").innerText = "Welcome back.";
 }
 
 function logout() {
-  localStorage.clear();
+  localStorage.removeItem("currentUserName");
+  localStorage.removeItem("currentUserRole");
+  localStorage.removeItem("currentUserEmail");
   window.location.href = "index.html";
 }
 </script>
