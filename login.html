@@ -210,35 +210,33 @@
     </div>
   </div>
 
-  <script>
-    function handleLogin() {
-      const email = document.getElementById("email").value.trim().toLowerCase();
-      const password = document.getElementById("password").value.trim();
+ <script>
+function handleLogin() {
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const password = document.getElementById("password").value.trim();
 
-      const savedName = localStorage.getItem("userName");
-      const savedEmail = localStorage.getItem("userEmail");
-      const savedPassword = localStorage.getItem("userPassword");
-      const savedRole = localStorage.getItem("userRole");
+  let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
 
-      if (!savedEmail || !savedPassword || !savedRole || !savedName) {
-        alert("No account found. Please create an account first.");
-        return;
-      }
+  const matchedAccount = accounts.find(account => 
+    account.email === email && account.password === password
+  );
 
-      if (email === savedEmail && password === savedPassword) {
-        localStorage.setItem("currentUserName", savedName);
-        localStorage.setItem("currentUserRole", savedRole);
+  if (!matchedAccount) {
+    alert("Invalid email or password.");
+    return;
+  }
 
-        if (savedRole === "student") {
-          window.location.href = "students.html";
-        } else {
-          window.location.href = "teachers.html";
-        }
-      } else {
-        alert("Invalid email or password.");
-      }
-    }
-  </script>
+  localStorage.setItem("currentUserName", matchedAccount.name);
+  localStorage.setItem("currentUserRole", matchedAccount.role);
+  localStorage.setItem("currentUserEmail", matchedAccount.email);
+
+  if (matchedAccount.role === "student") {
+    window.location.href = "students.html";
+  } else {
+    window.location.href = "teachers.html";
+  }
+}
+</script>
 
 </body>
 </html>
