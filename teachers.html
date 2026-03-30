@@ -15,19 +15,17 @@ body {
   color: #111;
 }
 
-/* NAVBAR */
 nav {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: 22px 40px;
+  padding: 20px 40px;
 }
 
 .brand {
   text-align: center;
   font-family: 'Playfair Display', serif;
-  font-size: 52px;
-  letter-spacing: 1px;
+  font-size: 50px;
   line-height: 1;
 }
 
@@ -35,6 +33,508 @@ nav {
   display: flex;
   justify-content: flex-end;
   gap: 24px;
+}
+
+.nav-right a {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.nav-right a:hover {
+  opacity: 0.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 24px 100px;
+}
+
+.hero {
+  margin-bottom: 40px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  margin: 0 0 10px;
+  line-height: 1.08;
+  max-width: 900px;
+}
+
+.hero-sub {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 640px;
+  margin: 0;
+}
+
+.section {
+  margin-top: 40px;
+}
+
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin-bottom: 18px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.card {
+  background: rgba(255,255,255,0.72);
+  border-radius: 20px;
+  padding: 22px;
+  border: 1px solid rgba(0,0,0,0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.lesson-card {
+  max-width: 520px;
+}
+
+.earnings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.earning-card {
+  background: rgba(255,255,255,0.72);
+  border-radius: 20px;
+  padding: 26px;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+}
+
+.amount {
+  font-size: 38px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 8px;
+}
+
+.label {
+  font-size: 14px;
+  color: #666;
+}
+
+.fee-note {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.8;
+  max-width: 720px;
+}
+
+.actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cta {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: black;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.cta:hover {
+  background: #333;
+}
+
+.logout {
+  font-size: 14px;
+  cursor: pointer;
+  color: #555;
+}
+
+.logout:hover {
+  opacity: 0.6;
+}
+
+/* modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-box {
+  width: 100%;
+  max-width: 560px;
+  background: #fffaf2;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+}
+
+.modal-box h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  margin: 0 0 18px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.1);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  background: white;
+}
+
+.form-group textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.secondary-btn {
+  background: transparent;
+  color: #333;
+  border: 1px solid rgba(0,0,0,0.12);
+}
+
+.secondary-btn:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+.success-note {
+  margin-top: 12px;
+  color: #555;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .cards,
+  .earnings {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    padding: 20px 24px;
+  }
+
+  .brand {
+    font-size: 40px;
+  }
+
+  .nav-right {
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div></div>
+  <div class="brand">PAC</div>
+  <div class="nav-right">
+    <a href="courses.html">Courses</a>
+    <a href="index.html">Home</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <h1 id="welcomeText"></h1>
+    <p class="hero-sub">Welcome back to your teaching space. Manage students, courses, and earnings in one place.</p>
+  </div>
+
+  <div class="section">
+    <h2>Students</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Vicky Lin</h3>
+        <p>Piano Fundamentals · Lesson 3</p>
+      </div>
+      <div class="card">
+        <h3>Jason Chen</h3>
+        <p>Music Production · Lesson 1</p>
+      </div>
+      <div class="card">
+        <h3>Emily Wang</h3>
+        <p>Composition Workshop · Lesson 5</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Courses</h2>
+    <div class="cards" id="teacherCoursesGrid">
+      <div class="card">
+        <h3>Piano Fundamentals</h3>
+        <p>12 students enrolled</p>
+      </div>
+      <div class="card">
+        <h3>Composition Workshop</h3>
+        <p>8 students enrolled</p>
+      </div>
+      <div class="card">
+        <h3>Music Production</h3>
+        <p>10 students enrolled</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Upcoming Lesson</h2>
+    <div class="card lesson-card">
+      <h3>Piano Lesson with Vicky Lin</h3>
+      <p>March 25 · 7:00 PM</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Earnings</h2>
+    <div class="earnings">
+      <div class="earning-card">
+        <div class="amount">$1,240</div>
+        <div class="label">Total Revenue</div>
+      </div>
+      <div class="earning-card">
+        <div class="amount">$186</div>
+        <div class="label">PAC Fee (15%)</div>
+      </div>
+      <div class="earning-card">
+        <div class="amount">$1,054</div>
+        <div class="label">Your Earnings</div>
+      </div>
+    </div>
+
+    <p class="fee-note">
+      PAC takes a 15% platform fee to support payments, student matching, course management, and platform operations.
+    </p>
+  </div>
+
+  <div class="actions">
+    <button class="cta" onclick="openModal()">+ Add Course</button>
+    <div class="logout" onclick="logout()">Logout</div>
+  </div>
+
+</div>
+
+<!-- modal -->
+<div class="modal" id="courseModal">
+  <div class="modal-box">
+    <h2>Add Course</h2>
+
+    <div class="form-group">
+      <label for="courseTitle">Course Title</label>
+      <input id="courseTitle" type="text" placeholder="Enter course title">
+    </div>
+
+    <div class="form-group">
+      <label for="courseDescription">Course Description</label>
+      <textarea id="courseDescription" placeholder="Write a short description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="courseLevel">Level</label>
+      <select id="courseLevel">
+        <option value="">Select level</option>
+        <option>Beginner</option>
+        <option>Intermediate</option>
+        <option>Advanced</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="courseFormat">Format</label>
+      <select id="courseFormat">
+        <option value="">Select format</option>
+        <option>Online</option>
+        <option>In-person</option>
+        <option>Hybrid</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="coursePrice">Price</label>
+      <input id="coursePrice" type="text" placeholder="e.g. $60">
+    </div>
+
+    <div class="modal-actions">
+      <button class="cta secondary-btn" onclick="closeModal()">Cancel</button>
+      <button class="cta" onclick="addCourse()">Add Course</button>
+    </div>
+
+    <div class="success-note" id="successNote"></div>
+  </div>
+</div>
+
+<script>
+const name = localStorage.getItem("currentUserName");
+if (name) {
+  document.getElementById("welcomeText").innerText = "Welcome back, " + name + ".";
+} else {
+  document.getElementById("welcomeText").innerText = "Welcome back.";
+}
+
+function logout() {
+  localStorage.removeItem("currentUserName");
+  localStorage.removeItem("currentUserRole");
+  localStorage.removeItem("currentUserEmail");
+  window.location.href = "index.html";
+}
+
+function openModal() {
+  document.getElementById("courseModal").classList.add("show");
+}
+
+function closeModal() {
+  document.getElementById("courseModal").classList.remove("show");
+  document.getElementById("successNote").innerText = "";
+}
+
+function getCustomCourses() {
+  return JSON.parse(localStorage.getItem("customCourses")) || [];
+}
+
+function saveCustomCourses(courses) {
+  localStorage.setItem("customCourses", JSON.stringify(courses));
+}
+
+function addCourse() {
+  const title = document.getElementById("courseTitle").value.trim();
+  const description = document.getElementById("courseDescription").value.trim();
+  const level = document.getElementById("courseLevel").value;
+  const format = document.getElementById("courseFormat").value;
+  const price = document.getElementById("coursePrice").value.trim();
+
+  if (!title || !description || !level || !format || !price) {
+    alert("Please complete all fields.");
+    return;
+  }
+
+  const newCourse = {
+    title,
+    description,
+    level,
+    format,
+    price,
+    teacher: localStorage.getItem("currentUserName") || "Instructor"
+  };
+
+  const courses = getCustomCourses();
+  courses.push(newCourse);
+  saveCustomCourses(courses);
+
+  renderTeacherCourses();
+
+  document.getElementById("courseTitle").value = "";
+  document.getElementById("courseDescription").value = "";
+  document.getElementById("courseLevel").value = "";
+  document.getElementById("courseFormat").value = "";
+  document.getElementById("coursePrice").value = "";
+
+  document.getElementById("successNote").innerText = "Course added successfully.";
+  setTimeout(() => {
+    closeModal();
+  }, 800);
+}
+
+function renderTeacherCourses() {
+  const grid = document.getElementById("teacherCoursesGrid");
+  const customCourses = getCustomCourses();
+
+  const defaultCards = `
+    <div class="card">
+      <h3>Piano Fundamentals</h3>
+      <p>12 students enrolled</p>
+    </div>
+    <div class="card">
+      <h3>Composition Workshop</h3>
+      <p>8 students enrolled</p>
+    </div>
+    <div class="card">
+      <h3>Music Production</h3>
+      <p>10 students enrolled</p>
+    </div>
+  `;
+
+  const customCards = customCourses.map(course => `
+    <div class="card">
+      <h3>${course.title}</h3>
+      <p>${course.level} · ${course.format} · ${course.price}</p>
+    </div>
+  `).join("");
+
+  grid.innerHTML = defaultCards + customCards;
+}
+
+renderTeacherCourses();
+</script>
+
+</body>
+</html>  gap: 24px;
   font-size: 14px;
 }
 
