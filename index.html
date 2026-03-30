@@ -5,7 +5,7 @@
 <title>PAC</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body {
@@ -49,40 +49,127 @@ nav {
 /* HERO */
 .hero {
   text-align: center;
-  padding: 90px 20px;
+  padding: 90px 20px 60px;
 }
 
 .hero img {
-  height: 240px;
+  height: 220px;
   margin-bottom: 30px;
 }
 
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 58px;
+  font-size: 60px;
   line-height: 1.1;
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
 }
 
 .subtitle {
   color: #666;
   margin-top: 20px;
-  font-size: 16px;
+  font-size: 17px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
 }
 
 .button {
   margin-top: 30px;
-  padding: 12px 24px;
+  padding: 12px 26px;
   background: black;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 999px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .button:hover {
   background: #333;
+}
+
+/* SECTION */
+.section {
+  max-width: 1100px;
+  margin: 70px auto;
+  padding: 0 20px;
+}
+
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+/* CARDS */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.card {
+  background: rgba(255,255,255,0.7);
+  padding: 28px;
+  border-radius: 18px;
+}
+
+.card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.card ul {
+  margin-top: 10px;
+  padding-left: 18px;
+  color: #444;
+  font-size: 14px;
+}
+
+/* COURSE GRID */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.course-card {
+  background: rgba(255,255,255,0.7);
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.course-card h4 {
+  margin: 0 0 10px;
+}
+
+.price {
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+/* CTA */
+.cta {
+  text-align: center;
+  margin: 80px 0;
+}
+
+.cta h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+}
+
+.cta p {
+  color: #555;
 }
 
 </style>
@@ -95,15 +182,15 @@ h1 {
 
   <div class="brand">PAC</div>
 
- <div class="nav-right">
-  <a href="about.html">About</a>
-  <a href="courses.html">Courses</a>
-  <a href="login.html">Login</a>
-</div>
+  <div class="nav-right">
+    <a href="about.html">About</a>
+    <a href="courses.html">Courses</a>
+    <a href="login.html">Login</a>
+  </div>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-
   <img src="logo.png" alt="PAC logo">
 
   <h1>
@@ -115,10 +202,77 @@ h1 {
     Connecting serious music students with international teachers and real opportunities.
   </p>
 
-  <button class="button">
-    Join the Pilot
-  </button>
+  <a href="login.html">
+    <button class="button">Get Started</button>
+  </a>
+</div>
 
+<!-- STUDENT / TEACHER -->
+<div class="section">
+  <h2>Built for students and teachers</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>For Students</h3>
+      <p>
+        Learn from global instructors and build a clear path in music without leaving your country.
+      </p>
+      <ul>
+        <li>International teachers</li>
+        <li>Structured courses</li>
+        <li>Track your progress</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>For Teachers</h3>
+      <p>
+        Reach students worldwide and build flexible teaching opportunities.
+      </p>
+      <ul>
+        <li>Create courses</li>
+        <li>Manage students</li>
+        <li>Expand globally</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED COURSES -->
+<div class="section">
+  <h2>Featured Courses</h2>
+
+  <div class="course-grid">
+
+    <div class="course-card">
+      <h4>Piano Fundamentals</h4>
+      <p>Build strong technique and musical foundation.</p>
+      <div class="price">$45</div>
+    </div>
+
+    <div class="course-card">
+      <h4>Music Production</h4>
+      <p>Learn recording, mixing, and digital workflow.</p>
+      <div class="price">$55</div>
+    </div>
+
+    <div class="course-card">
+      <h4>Songwriting</h4>
+      <p>Create original music with structured guidance.</p>
+      <div class="price">$42</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <h2>Start your journey with PAC</h2>
+  <p>Join as a student or teacher and explore global music education.</p>
+
+  <a href="login.html">
+    <button class="button">Join Now</button>
+  </a>
 </div>
 
 </body>
