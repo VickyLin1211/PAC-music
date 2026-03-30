@@ -204,13 +204,28 @@ function handleSignup() {
     return;
   }
 
-  localStorage.setItem("userName", name);
-  localStorage.setItem("userEmail", email);
-  localStorage.setItem("userPassword", password);
-  localStorage.setItem("userRole", role.value);
+  let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+
+  const existingAccount = accounts.find(account => account.email === email);
+
+  if (existingAccount) {
+    alert("This email is already registered.");
+    return;
+  }
+
+  const newAccount = {
+    name: name,
+    email: email,
+    password: password,
+    role: role.value
+  };
+
+  accounts.push(newAccount);
+  localStorage.setItem("accounts", JSON.stringify(accounts));
 
   localStorage.setItem("currentUserName", name);
   localStorage.setItem("currentUserRole", role.value);
+  localStorage.setItem("currentUserEmail", email);
 
   if (role.value === "student") {
     window.location.href = "students.html";
