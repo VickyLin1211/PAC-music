@@ -1,254 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Create Account | PAC</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Create Account | PAC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #f5ecd9;
-      color: #111;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #f5ecd9;
+  color: #111;
+}
 
-    nav {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      padding: 20px 40px;
-    }
+nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 20px 40px;
+}
 
-    .brand {
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 60px;
-    }
+.brand {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+}
 
-    .nav-left a,
-    .nav-right a {
-      text-decoration: none;
-      color: black;
-      font-size: 14px;
-    }
+.nav-left a,
+.nav-right a {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
 
-    .nav-right {
-      display: flex;
-      justify-content: flex-end;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 24px;
+}
 
-    .nav-left a:hover,
-    .nav-right a:hover {
-      opacity: 0.6;
-    }
+.nav-left a:hover,
+.nav-right a:hover {
+  opacity: 0.6;
+}
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 60px 24px 100px;
-    }
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 24px 100px;
+}
 
-    .signup-card {
-      max-width: 460px;
-      margin: 40px auto 0;
-      background: rgba(255,255,255,0.68);
-      border: 1px solid rgba(0,0,0,0.05);
-      border-radius: 22px;
-      padding: 36px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
+.signup-card {
+  max-width: 460px;
+  margin: 40px auto 0;
+  background: rgba(255,255,255,0.72);
+  border-radius: 22px;
+  padding: 36px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
 
-    .signup-card h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 44px;
-      margin: 0 0 10px 0;
-      text-align: center;
-    }
+.signup-card h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  text-align: center;
+  margin: 0 0 10px 0;
+}
 
-    .subtitle {
-      color: #666;
-      font-size: 15px;
-      text-align: center;
-      margin: 0 0 30px 0;
-      line-height: 1.7;
-    }
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
 
-    .input-group {
-      margin-bottom: 18px;
-    }
+.input-group {
+  margin-bottom: 18px;
+}
 
-    .input-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: #333;
-    }
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
 
-    .input-group input {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 13px 14px;
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 14px;
-      background: white;
-      font-size: 14px;
-      font-family: 'Inter', sans-serif;
-      transition: 0.2s ease;
-    }
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  font-size: 14px;
+}
 
-    .input-group input:focus {
-      outline: none;
-      border: 1px solid black;
-    }
+.input-group input:focus {
+  outline: none;
+  border: 1px solid black;
+}
 
-    .role-box {
-      margin: 10px 0 24px;
-    }
+.role-options {
+  margin: 20px 0;
+  font-size: 14px;
+  color: #444;
+  display: flex;
+  gap: 18px;
+}
 
-    .role-box p {
-      margin: 0 0 10px 0;
-      font-size: 14px;
-      color: #333;
-    }
+.signup-button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 999px;
+  border: none;
+  background: black;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
 
-    .role-options {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      font-size: 14px;
-      color: #555;
-    }
+.signup-button:hover {
+  background: #333;
+}
 
-    .signup-button {
-      width: 100%;
-      padding: 13px 18px;
-      border: none;
-      border-radius: 999px;
-      background: black;
-      color: white;
-      font-size: 14px;
-      cursor: pointer;
-      transition: 0.25s ease;
-    }
+.footer-links {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+  line-height: 1.8;
+  font-size: 14px;
+}
 
-    .signup-button:hover {
-      background: #333;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    }
+.footer-links a {
+  text-decoration: none;
+  color: black;
+}
 
-    .footer-links {
-      margin-top: 24px;
-      text-align: center;
-      font-size: 14px;
-      color: #666;
-      line-height: 1.8;
-    }
-
-    .footer-links a {
-      text-decoration: none;
-      color: black;
-    }
-
-    .footer-links a:hover {
-      opacity: 0.7;
-    }
-
-    @media (max-width: 900px) {
-      .brand {
-        font-size: 42px;
-      }
-
-      .nav-right {
-        gap: 14px;
-      }
-
-      nav {
-        padding: 20px 24px;
-      }
-    }
-  </style>
+.footer-links a:hover {
+  opacity: 0.7;
+}
+</style>
 </head>
+
 <body>
 
-  <nav>
-    <div class="nav-left">
-      <a href="login.html">← Back to Login</a>
-    </div>
-
-    <div class="brand">PAC</div>
-
-    <div class="nav-right">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="students.html">Students</a>
-      <a href="teachers.html">Teachers</a>
-      <a href="courses.html">Courses</a>
-    </div>
-  </nav>
-
-  <div class="container">
-    <div class="signup-card">
-      <h1>Create account</h1>
-      <p class="subtitle">
-        Start your journey with PAC.
-      </p>
-
-      <div class="input-group">
-        <label for="name">Full name</label>
-        <input id="name" type="text" placeholder="Enter your name">
-      </div>
-
-      <div class="input-group">
-        <label for="email">Email</label>
-        <input id="email" type="email" placeholder="Enter your email">
-      </div>
-
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input id="password" type="password" placeholder="Create a password">
-      </div>
-
-      <div class="role-box">
-        <p>Create account as</p>
-        <div class="role-options">
-          <label><input type="radio" name="role" value="student"> Student</label>
-          <label><input type="radio" name="role" value="instructor"> Instructor</label>
-        </div>
-      </div>
-
-      <button class="signup-button" onclick="handleSignup()">Create Account</button>
-
-      <div class="footer-links">
-        Already have an account? <a href="login.html">Login</a><br>
-        Not ready yet? <a href="index.html">Return to Home</a>
-      </div>
-    </div>
+<nav>
+  <div class="nav-left">
+    <a href="login.html">← Back to Login</a>
   </div>
 
-  <script>
-    function handleSignup() {
-      const role = document.querySelector('input[name="role"]:checked');
+  <div class="brand">PAC</div>
 
-      if (!role) {
-        alert("Please select Student or Instructor");
-        return;
-      }
+  <div class="nav-right">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="courses.html">Courses</a>
+  </div>
+</nav>
 
-      if (role.value === "student") {
-        window.location.href = "students.html";
-      } else {
-        window.location.href = "teachers.html";
-      }
-    }
-  </script>
+<div class="container">
+  <div class="signup-card">
+
+    <h1>Create account</h1>
+    <p class="subtitle">Start your journey with PAC.</p>
+
+    <div class="input-group">
+      <label for="name">Full name</label>
+      <input id="name" type="text" placeholder="Enter your name">
+    </div>
+
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="Enter your email">
+    </div>
+
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="Create a password">
+    </div>
+
+    <div class="role-options">
+      <label><input type="radio" name="role" value="student"> Student</label>
+      <label><input type="radio" name="role" value="instructor"> Instructor</label>
+    </div>
+
+    <button class="signup-button" onclick="handleSignup()">Create Account</button>
+
+    <div class="footer-links">
+      Already have an account? <a href="login.html">Login</a><br>
+      Not ready yet? <a href="index.html">Return to Home</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function handleSignup() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const password = document.getElementById("password").value.trim();
+  const role = document.querySelector('input[name="role"]:checked');
+
+  if (!name || !email || !password || !role) {
+    alert("Please complete all fields.");
+    return;
+  }
+
+  localStorage.setItem("userName", name);
+  localStorage.setItem("userEmail", email);
+  localStorage.setItem("userPassword", password);
+  localStorage.setItem("userRole", role.value);
+
+  localStorage.setItem("currentUserName", name);
+  localStorage.setItem("currentUserRole", role.value);
+
+  if (role.value === "student") {
+    window.location.href = "students.html";
+  } else {
+    window.location.href = "teachers.html";
+  }
+}
+</script>
 
 </body>
 </html>
-
