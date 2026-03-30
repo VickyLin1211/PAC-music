@@ -33,6 +33,7 @@ nav {
   display: flex;
   justify-content: flex-end;
   gap: 24px;
+  flex-wrap: wrap;
 }
 
 .nav-right a {
@@ -297,6 +298,7 @@ nav {
   <div class="nav-right">
     <a href="courses.html">Courses</a>
     <a href="index.html">Home</a>
+    <a href="#" onclick="goToLoginOrDashboard()">Login</a>
   </div>
 </nav>
 
@@ -373,13 +375,13 @@ nav {
     </p>
   </div>
 
- <div class="actions">
-  <div style="display:flex; gap:12px; flex-wrap:wrap;">
-    <button class="cta" onclick="openModal()">+ Add Course</button>
-    <button class="cta" onclick="clearAllCustomCourses()">Clear Added Courses</button>
+  <div class="actions">
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <button class="cta" onclick="openModal()">+ Add Course</button>
+      <button class="cta" onclick="clearAllCustomCourses()">Clear Added Courses</button>
+    </div>
+    <div class="logout" onclick="logout()">Logout</div>
   </div>
-  <div class="logout" onclick="logout()">Logout</div>
-</div>
 </div>
 
 <div class="modal" id="courseModal">
@@ -417,8 +419,18 @@ nav {
     </div>
 
     <div class="form-group">
+      <label for="courseLanguage">Language</label>
+      <select id="courseLanguage">
+        <option value="">Select language</option>
+        <option>English</option>
+        <option>Mandarin</option>
+        <option>Spanish</option>
+      </select>
+    </div>
+
+    <div class="form-group">
       <label for="coursePrice">Price</label>
-      <input id="coursePrice" type="text" placeholder="e.g. $60">
+      <input id="coursePrice" type="text" placeholder="e.g. $45">
     </div>
 
     <div class="modal-actions">
@@ -431,11 +443,37 @@ nav {
 </div>
 
 <script>
-const name = localStorage.getItem("currentUserName");
-if (name) {
-  document.getElementById("welcomeText").innerText = "Welcome back, " + name + ".";
+function getCurrentUser() {
+  return {
+    name: localStorage.getItem("currentUserName"),
+    role: localStorage.getItem("currentUserRole"),
+    email: localStorage.getItem("currentUserEmail")
+  };
+}
+
+function goToLoginOrDashboard() {
+  const user = getCurrentUser();
+
+  if (!user.role) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  if (user.role === "student") {
+    window.location.href = "students.html";
+  } else {
+    window.location.href = "teachers.html";
+  }
+}
+
+const user = getCurrentUser();
+
+if (!user.role) {
+  window.location.href = "login.html";
+} else if (user.role !== "instructor") {
+  window.location.href = "students.html";
 } else {
-  document.getElementById("welcomeText").innerText = "Welcome back.";
+  document.getElementById("welcomeText").innerText = "Welcome back, " + user.name + ".";
 }
 
 function logout() {
@@ -467,9 +505,10 @@ function addCourse() {
   const description = document.getElementById("courseDescription").value.trim();
   const level = document.getElementById("courseLevel").value;
   const format = document.getElementById("courseFormat").value;
+  const language = document.getElementById("courseLanguage").value;
   const price = document.getElementById("coursePrice").value.trim();
 
-  if (!title || !description || !level || !format || !price) {
+  if (!title || !description || !level || !format || !language || !price) {
     alert("Please complete all fields.");
     return;
   }
@@ -480,6 +519,7 @@ function addCourse() {
     description,
     level,
     format,
+    language,
     price,
     teacher: localStorage.getItem("currentUserName") || "Instructor"
   };
@@ -494,6 +534,7 @@ function addCourse() {
   document.getElementById("courseDescription").value = "";
   document.getElementById("courseLevel").value = "";
   document.getElementById("courseFormat").value = "";
+  document.getElementById("courseLanguage").value = "";
   document.getElementById("coursePrice").value = "";
 
   document.getElementById("successNote").innerText = "Course added successfully.";
@@ -539,9 +580,9 @@ function renderTeacherCourses() {
   const customCards = customCourses.map(course => `
     <div class="card">
       <h3>${course.title}</h3>
-      <p>${course.level} · ${course.format} · ${course.price}</p>
+      <p>${course.level} · ${course.format} · ${course.language} · ${course.price}</p>
       <p style="margin-top:8px;">${course.description}</p>
-      <button 
+      <button
         onclick="deleteCourse(${course.id})"
         style="
           margin-top:14px;
