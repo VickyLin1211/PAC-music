@@ -373,11 +373,13 @@ nav {
     </p>
   </div>
 
-  <div class="actions">
+ <div class="actions">
+  <div style="display:flex; gap:12px; flex-wrap:wrap;">
     <button class="cta" onclick="openModal()">+ Add Course</button>
-    <div class="logout" onclick="logout()">Logout</div>
+    <button class="cta" onclick="clearAllCustomCourses()">Clear Added Courses</button>
   </div>
-
+  <div class="logout" onclick="logout()">Logout</div>
+</div>
 </div>
 
 <div class="modal" id="courseModal">
@@ -473,6 +475,7 @@ function addCourse() {
   }
 
   const newCourse = {
+    id: Date.now(),
     title,
     description,
     level,
@@ -499,6 +502,21 @@ function addCourse() {
   }, 800);
 }
 
+function deleteCourse(courseId) {
+  let courses = getCustomCourses();
+  courses = courses.filter(course => course.id !== courseId);
+  saveCustomCourses(courses);
+  renderTeacherCourses();
+}
+
+function clearAllCustomCourses() {
+  if (!confirm("Are you sure you want to remove all added courses?")) {
+    return;
+  }
+  localStorage.removeItem("customCourses");
+  renderTeacherCourses();
+}
+
 function renderTeacherCourses() {
   const grid = document.getElementById("teacherCoursesGrid");
   const customCourses = getCustomCourses();
@@ -522,6 +540,21 @@ function renderTeacherCourses() {
     <div class="card">
       <h3>${course.title}</h3>
       <p>${course.level} · ${course.format} · ${course.price}</p>
+      <p style="margin-top:8px;">${course.description}</p>
+      <button 
+        onclick="deleteCourse(${course.id})"
+        style="
+          margin-top:14px;
+          padding:8px 14px;
+          border:none;
+          border-radius:999px;
+          background:#111;
+          color:white;
+          font-size:12px;
+          cursor:pointer;
+        ">
+        Delete
+      </button>
     </div>
   `).join("");
 
