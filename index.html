@@ -36,6 +36,7 @@ nav {
   justify-content: flex-end;
   gap: 24px;
   font-size: 14px;
+  flex-wrap: wrap;
 }
 
 .nav-right a {
@@ -93,6 +94,7 @@ nav {
   font-size: 14px;
   display: inline-block;
   transition: 0.25s ease;
+  cursor: pointer;
 }
 
 .button.primary {
@@ -339,7 +341,7 @@ nav {
   <div class="nav-right">
     <a href="about.html">About</a>
     <a href="courses.html">Courses</a>
-    <a href="login.html">Login</a>
+    <a href="#" onclick="goToLoginOrDashboard()">Login</a>
   </div>
 </nav>
 
@@ -356,7 +358,7 @@ nav {
   </p>
 
   <div class="hero-actions">
-    <a class="button primary" href="login.html">Get Started</a>
+    <a class="button primary" href="#" onclick="goToLoginOrDashboard()">Get Started</a>
     <a class="button secondary" href="courses.html">Browse Courses</a>
   </div>
 </div>
@@ -380,7 +382,7 @@ nav {
       <div class="card-label">Structured Growth</div>
       <h3>Build a clearer path in music</h3>
       <p>Move through courses with more direction, consistency, and clarity instead of feeling lost after years of training.</p>
-      <a class="card-link" href="login.html">Start your path →</a>
+      <a class="card-link" href="#" onclick="goToLoginOrDashboard()">Start your path →</a>
     </div>
 
     <div class="card info-card">
@@ -418,7 +420,7 @@ nav {
       <div class="card-label">Independent Teaching</div>
       <h3>Create flexible teaching opportunities</h3>
       <p>Reach serious students beyond one city or one institution and build a teaching presence that feels more global and self-directed.</p>
-      <a class="card-link" href="login.html">Start teaching →</a>
+      <a class="card-link" href="#" onclick="goToLoginOrDashboard()">Start teaching →</a>
     </div>
 
     <div class="card info-card">
@@ -446,7 +448,7 @@ nav {
       <div class="card-label">Creative Visibility</div>
       <h3>Show what makes your teaching unique</h3>
       <p>Present your strengths, style, and teaching focus in a way that helps the right students find and connect with you.</p>
-      <a class="card-link" href="login.html">Build your profile →</a>
+      <a class="card-link" href="#" onclick="goToLoginOrDashboard()">Build your profile →</a>
     </div>
   </div>
 </div>
@@ -522,9 +524,34 @@ nav {
     <p>
       Whether you want to learn from international teachers or build a more independent teaching path, PAC is designed to make music education feel more open, modern, and connected.
     </p>
-    <a class="button primary" href="login.html">Join PAC</a>
+    <a class="button primary" href="#" onclick="goToLoginOrDashboard()">Join PAC</a>
   </div>
 </div>
+
+<script>
+function getCurrentUser() {
+  return {
+    name: localStorage.getItem("currentUserName"),
+    role: localStorage.getItem("currentUserRole"),
+    email: localStorage.getItem("currentUserEmail")
+  };
+}
+
+function goToLoginOrDashboard() {
+  const user = getCurrentUser();
+
+  if (!user.role) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  if (user.role === "student") {
+    window.location.href = "students.html";
+  } else {
+    window.location.href = "teachers.html";
+  }
+}
+</script>
 
 </body>
 </html>
