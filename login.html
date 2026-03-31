@@ -24,6 +24,7 @@
       text-align: center;
       font-family: 'Playfair Display', serif;
       font-size: 60px;
+      line-height: 1;
     }
 
     .nav-left a,
@@ -159,9 +160,17 @@
     }
 
     @media (max-width: 900px) {
-      .brand { font-size: 42px; }
-      .nav-right { gap: 14px; }
-      nav { padding: 20px 24px; }
+      .brand {
+        font-size: 42px;
+      }
+
+      .nav-right {
+        gap: 14px;
+      }
+
+      nav {
+        padding: 20px 24px;
+      }
     }
   </style>
 </head>
@@ -178,6 +187,7 @@
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="courses.html">Courses</a>
+      <a href="#" onclick="goToLoginOrDashboard()">Login</a>
     </div>
   </nav>
 
@@ -211,11 +221,43 @@
   </div>
 
 <script>
+function getCurrentUser() {
+  return {
+    name: localStorage.getItem("currentUserName"),
+    role: localStorage.getItem("currentUserRole"),
+    email: localStorage.getItem("currentUserEmail")
+  };
+}
+
+function goToLoginOrDashboard() {
+  const user = getCurrentUser();
+
+  if (!user.role) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  if (user.role === "student") {
+    window.location.href = "students.html";
+  } else if (user.role === "instructor") {
+    window.location.href = "teachers.html";
+  } else {
+    window.location.href = "login.html";
+  }
+}
+
+const user = getCurrentUser();
+if (user.role === "student") {
+  window.location.href = "students.html";
+} else if (user.role === "instructor") {
+  window.location.href = "teachers.html";
+}
+
 function handleLogin() {
   const email = document.getElementById("email").value.trim().toLowerCase();
   const password = document.getElementById("password").value.trim();
 
-  let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+  const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
 
   const matchedAccount = accounts.find(account =>
     account.email === email && account.password === password
@@ -232,8 +274,10 @@ function handleLogin() {
 
   if (matchedAccount.role === "student") {
     window.location.href = "students.html";
-  } else {
+  } else if (matchedAccount.role === "instructor") {
     window.location.href = "teachers.html";
+  } else {
+    alert("This account has an invalid role.");
   }
 }
 </script>
