@@ -282,11 +282,7 @@ function handleSignup() {
   localStorage.setItem("currentUserRole", role.value);
   localStorage.setItem("currentUserEmail", email);
 
-  if (role.value === "student") {
-    window.location.href = "students.html";
-  } else if (role.value === "instructor") {
-    window.location.href = "teachers.html";
-  }
+ window.location.href = "onboarding.html";
 }
 </script>
 
