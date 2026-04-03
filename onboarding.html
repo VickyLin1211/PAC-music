@@ -364,7 +364,17 @@ function saveProfile() {
   profile.role = user.role;
   profile.completedOnboarding = true;
 
-  localStorage.setItem("profile_" + user.email, JSON.stringify(profile));
+  let allProfiles = JSON.parse(localStorage.getItem("userProfiles")) || [];
+
+  const existingIndex = allProfiles.findIndex(p => p.email === user.email);
+
+  if (existingIndex !== -1) {
+    allProfiles[existingIndex] = profile;
+  } else {
+    allProfiles.push(profile);
+  }
+
+  localStorage.setItem("userProfiles", JSON.stringify(allProfiles));
 
   if (user.role === "student") {
     window.location.href = "students.html";
