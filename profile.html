@@ -232,13 +232,11 @@ function goToLoginOrDashboard() {
     return;
   }
 
-  if (user.role === "student") {
-    window.location.href = "students.html";
-  } else if (user.role === "instructor") {
-    window.location.href = "teachers.html";
-  } else {
-    window.location.href = "login.html";
-  }
+const user = getCurrentUser();
+
+if (!user.role || !user.email) {
+  window.location.href = "login.html";
+}
 }
 
 const user = getCurrentUser();
