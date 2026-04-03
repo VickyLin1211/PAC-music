@@ -242,12 +242,16 @@ function goToLoginOrDashboard() {
 }
 
 const user = getCurrentUser();
-if (user.role === "student") {
-  window.location.href = "students.html";
-} else if (user.role === "instructor") {
-  window.location.href = "teachers.html";
-}
+const profiles = JSON.parse(localStorage.getItem("userProfiles")) || [];
+const existingProfile = profiles.find(profile => profile.email === user.email);
 
+if (user.role === "student" && existingProfile) {
+  window.location.href = "students.html";
+} else if (user.role === "instructor" && existingProfile) {
+  window.location.href = "teachers.html";
+} else if (user.role && !existingProfile) {
+  window.location.href = "onboarding.html";
+}
 function handleSignup() {
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim().toLowerCase();
