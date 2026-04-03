@@ -268,9 +268,19 @@ function handleLogin() {
     return;
   }
 
+  // Save current session
   localStorage.setItem("currentUserName", matchedAccount.name);
   localStorage.setItem("currentUserRole", matchedAccount.role);
   localStorage.setItem("currentUserEmail", matchedAccount.email);
+
+  // Check whether onboarding is completed
+  const profiles = JSON.parse(localStorage.getItem("userProfiles")) || [];
+  const existingProfile = profiles.find(profile => profile.email === matchedAccount.email);
+
+  if (!existingProfile) {
+    window.location.href = "onboarding.html";
+    return;
+  }
 
   if (matchedAccount.role === "student") {
     window.location.href = "students.html";
