@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Onboarding | PAC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #f5ecd9;
+  color: #111;
+}
+
+nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.brand {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  line-height: 1;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px 100px;
+}
+
+.intro {
+  margin-bottom: 30px;
+}
+
+.intro h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 54px;
+  margin: 0 0 12px;
+  line-height: 1.05;
+}
+
+.intro p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0;
+}
+
+.form-card {
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+input,
+select,
+textarea {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.08);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  background: white;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: black;
+}
+
+.actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: none;
+  background: black;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #333;
+}
+
+.note {
+  margin-top: 18px;
+  color: #777;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  nav {
+    padding: 20px 24px;
+  }
+
+  .brand {
+    font-size: 42px;
+  }
+
+  .intro h1 {
+    font-size: 42px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div></div>
+  <div class="brand">PAC</div>
+  <div></div>
+</nav>
+
+<div class="container">
+  <div class="intro">
+    <h1 id="pageTitle">Complete your profile</h1>
+    <p id="pageSubtitle">Tell us a little more so we can personalize your experience on PAC.</p>
+  </div>
+
+  <div class="form-card">
+    <form id="onboardingForm">
+      <div class="form-grid" id="formFields"></div>
+
+      <div class="actions">
+        <button type="button" class="button" onclick="saveProfile()">Continue</button>
+      </div>
+    </form>
+
+    <div class="note">You can update this information later.</div>
+  </div>
+</div>
+
+<script>
+function getCurrentUser() {
+  return {
+    name: localStorage.getItem("currentUserName"),
+    role: localStorage.getItem("currentUserRole"),
+    email: localStorage.getItem("currentUserEmail")
+  };
+}
+
+const user = getCurrentUser();
+
+if (!user.role) {
+  window.location.href = "login.html";
+}
+
+const studentFields = `
+  <div class="form-group">
+    <label>Gender</label>
+    <select id="gender">
+      <option value="">Select</option>
+      <option>Female</option>
+      <option>Male</option>
+      <option>Non-binary</option>
+      <option>Prefer not to say</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Age</label>
+    <input id="age" type="number" placeholder="Enter your age">
+  </div>
+
+  <div class="form-group">
+    <label>Birthday</label>
+    <input id="birthday" type="date">
+  </div>
+
+  <div class="form-group">
+    <label>Country / City</label>
+    <input id="location" type="text" placeholder="e.g. Boston, USA">
+  </div>
+
+  <div class="form-group">
+    <label>Primary Instrument</label>
+    <input id="instrument" type="text" placeholder="e.g. Piano">
+  </div>
+
+  <div class="form-group">
+    <label>Current Level</label>
+    <select id="level">
+      <option value="">Select</option>
+      <option>Beginner</option>
+      <option>Intermediate</option>
+      <option>Advanced</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Years of Experience</label>
+    <input id="experienceYears" type="text" placeholder="e.g. 4 years">
+  </div>
+
+  <div class="form-group">
+    <label>Preferred Lesson Format</label>
+    <select id="lessonFormat">
+      <option value="">Select</option>
+      <option>Online</option>
+      <option>In-person</option>
+      <option>Hybrid</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Preferred Language</label>
+    <select id="language">
+      <option value="">Select</option>
+      <option>English</option>
+      <option>Mandarin</option>
+      <option>Spanish</option>
+    </select>
+  </div>
+
+  <div class="form-group full">
+    <label>Learning Goals</label>
+    <textarea id="goals" placeholder="What do you want to improve or achieve through PAC?"></textarea>
+  </div>
+`;
+
+const instructorFields = `
+  <div class="form-group">
+    <label>Gender</label>
+    <select id="gender">
+      <option value="">Select</option>
+      <option>Female</option>
+      <option>Male</option>
+      <option>Non-binary</option>
+      <option>Prefer not to say</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Age</label>
+    <input id="age" type="number" placeholder="Enter your age">
+  </div>
+
+  <div class="form-group">
+    <label>Birthday</label>
+    <input id="birthday" type="date">
+  </div>
+
+  <div class="form-group">
+    <label>Country / City</label>
+    <input id="location" type="text" placeholder="e.g. New York, USA">
+  </div>
+
+  <div class="form-group">
+    <label>Primary Teaching Area</label>
+    <input id="specialty" type="text" placeholder="e.g. Jazz Piano">
+  </div>
+
+  <div class="form-group">
+    <label>Years of Teaching Experience</label>
+    <input id="experienceYears" type="text" placeholder="e.g. 8 years">
+  </div>
+
+  <div class="form-group">
+    <label>Certifications / Degrees</label>
+    <input id="credentials" type="text" placeholder="e.g. Berklee College of Music">
+  </div>
+
+  <div class="form-group">
+    <label>Teaching Format</label>
+    <select id="lessonFormat">
+      <option value="">Select</option>
+      <option>Online</option>
+      <option>In-person</option>
+      <option>Hybrid</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Teaching Language</label>
+    <select id="language">
+      <option value="">Select</option>
+      <option>English</option>
+      <option>Mandarin</option>
+      <option>Spanish</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Starting Price</label>
+    <input id="price" type="text" placeholder="e.g. $45">
+  </div>
+
+  <div class="form-group full">
+    <label>Short Bio</label>
+    <textarea id="bio" placeholder="Describe what you teach and your background."></textarea>
+  </div>
+`;
+
+if (user.role === "student") {
+  document.getElementById("pageTitle").innerText = "Tell us about your learning path";
+  document.getElementById("pageSubtitle").innerText = "We’ll use this to recommend the right courses and teachers for you.";
+  document.getElementById("formFields").innerHTML = studentFields;
+} else {
+  document.getElementById("pageTitle").innerText = "Build your teaching profile";
+  document.getElementById("pageSubtitle").innerText = "Tell us about your experience so students can understand what you offer.";
+  document.getElementById("formFields").innerHTML = instructorFields;
+}
+
+function saveProfile() {
+  const profile = {};
+
+  const inputs = document.querySelectorAll("#formFields input, #formFields select, #formFields textarea");
+  inputs.forEach(input => {
+    profile[input.id] = input.value.trim();
+  });
+
+  profile.name = user.name;
+  profile.email = user.email;
+  profile.role = user.role;
+  profile.completedOnboarding = true;
+
+  localStorage.setItem("profile_" + user.email, JSON.stringify(profile));
+
+  if (user.role === "student") {
+    window.location.href = "students.html";
+  } else {
+    window.location.href = "teachers.html";
+  }
+}
+</script>
+
+</body>
+</html>
