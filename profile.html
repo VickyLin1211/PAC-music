@@ -181,7 +181,6 @@ nav {
 
 <div class="container">
   <div class="signup-card">
-
     <h1>Create account</h1>
     <p class="subtitle">Start your journey with PAC.</p>
 
@@ -205,13 +204,12 @@ nav {
       <label><input type="radio" name="role" value="instructor"> Instructor</label>
     </div>
 
-   <button type="button" class="signup-button" onclick="handleSignup()">Create Account</button>
+    <button type="button" class="signup-button" onclick="handleSignup()">Create Account</button>
 
     <div class="footer-links">
       Already have an account? <a href="login.html">Login</a><br>
       Not ready yet? <a href="index.html">Return to Home</a>
     </div>
-
   </div>
 </div>
 
@@ -227,7 +225,7 @@ function getCurrentUser() {
 function goToLoginOrDashboard() {
   const user = getCurrentUser();
 
-  if (!user.role || !user.email) {
+  if (!user.role) {
     window.location.href = "login.html";
     return;
   }
