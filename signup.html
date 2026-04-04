@@ -181,7 +181,6 @@ nav {
 
 <div class="container">
   <div class="signup-card">
-
     <h1>Create account</h1>
     <p class="subtitle">Start your journey with PAC.</p>
 
@@ -205,13 +204,12 @@ nav {
       <label><input type="radio" name="role" value="instructor"> Instructor</label>
     </div>
 
-    <button class="signup-button" onclick="handleSignup()">Create Account</button>
+    <button type="button" class="signup-button" onclick="handleSignup()">Create Account</button>
 
     <div class="footer-links">
       Already have an account? <a href="login.html">Login</a><br>
       Not ready yet? <a href="index.html">Return to Home</a>
     </div>
-
   </div>
 </div>
 
@@ -232,6 +230,14 @@ function goToLoginOrDashboard() {
     return;
   }
 
+  const profiles = JSON.parse(localStorage.getItem("userProfiles")) || [];
+  const existingProfile = profiles.find(profile => profile.email === user.email);
+
+  if (!existingProfile) {
+    window.location.href = "onboarding.html";
+    return;
+  }
+
   if (user.role === "student") {
     window.location.href = "students.html";
   } else if (user.role === "instructor") {
@@ -241,17 +247,23 @@ function goToLoginOrDashboard() {
   }
 }
 
-const user = getCurrentUser();
-const profiles = JSON.parse(localStorage.getItem("userProfiles")) || [];
-const existingProfile = profiles.find(profile => profile.email === user.email);
+(function checkExistingSession() {
+  const user = getCurrentUser();
 
-if (user.role === "student" && existingProfile) {
-  window.location.href = "students.html";
-} else if (user.role === "instructor" && existingProfile) {
-  window.location.href = "teachers.html";
-} else if (user.role && !existingProfile) {
-  window.location.href = "onboarding.html";
-}
+  if (!user.role || !user.email) return;
+
+  const profiles = JSON.parse(localStorage.getItem("userProfiles")) || [];
+  const existingProfile = profiles.find(profile => profile.email === user.email);
+
+  if (existingProfile && user.role === "student") {
+    window.location.href = "students.html";
+  } else if (existingProfile && user.role === "instructor") {
+    window.location.href = "teachers.html";
+  } else if (!existingProfile) {
+    window.location.href = "onboarding.html";
+  }
+})();
+
 function handleSignup() {
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim().toLowerCase();
@@ -286,7 +298,7 @@ function handleSignup() {
   localStorage.setItem("currentUserRole", role.value);
   localStorage.setItem("currentUserEmail", email);
 
- window.location.href = "onboarding.html";
+  window.location.href = "onboarding.html";
 }
 </script>
 
