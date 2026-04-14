@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Create Account | PAC</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -163,7 +163,6 @@
 </head>
 
 <body>
-
   <nav>
     <div class="nav-left">
       <a href="login.html">← Back to Login</a>
@@ -186,28 +185,28 @@
 
       <div class="input-group">
         <label for="name">Full name</label>
-        <input id="name" type="text" placeholder="Enter your name">
+        <input id="name" type="text" placeholder="Enter your name" />
       </div>
 
       <div class="input-group">
         <label for="email">Email</label>
-        <input id="email" type="email" placeholder="Enter your email">
+        <input id="email" type="email" placeholder="Enter your email" />
       </div>
 
       <div class="input-group">
         <label for="password">Password</label>
-        <input id="password" type="password" placeholder="Create a password">
+        <input id="password" type="password" placeholder="Create a password" />
       </div>
 
       <div class="role-options">
-        <label><input type="radio" name="role" value="student"> Student</label>
-        <label><input type="radio" name="role" value="instructor"> Instructor</label>
+        <label><input type="radio" name="role" value="student" /> Student</label>
+        <label><input type="radio" name="role" value="instructor" /> Instructor</label>
       </div>
 
       <button type="button" class="signup-button" onclick="handleSignup()">Create Account</button>
 
       <div class="footer-links">
-        Already have an account? <a href="login.html">Login</a><br>
+        Already have an account? <a href="login.html">Login</a><br />
         Not ready yet? <a href="index.html">Return to Home</a>
       </div>
     </div>
@@ -222,15 +221,19 @@
       };
     }
 
+    function getProfiles() {
+      return JSON.parse(localStorage.getItem("userProfiles")) || [];
+    }
+
     function goToLoginOrDashboard() {
       const user = getCurrentUser();
 
-      if (!user.role) {
+      if (!user.role || !user.email) {
         window.location.href = "login.html";
         return;
       }
 
-      const profiles = JSON.parse(localStorage.getItem("userProfiles")) || [];
+      const profiles = getProfiles();
       const existingProfile = profiles.find(profile => profile.email === user.email);
 
       if (!existingProfile) {
@@ -252,15 +255,18 @@
 
       if (!user.role || !user.email) return;
 
-      const profiles = JSON.parse(localStorage.getItem("userProfiles")) || [];
+      const profiles = getProfiles();
       const existingProfile = profiles.find(profile => profile.email === user.email);
 
-      if (existingProfile && user.role === "student") {
-        window.location.href = "students.html";
-      } else if (existingProfile && user.role === "instructor") {
-        window.location.href = "teachers.html";
-      } else if (!existingProfile) {
+      if (!existingProfile) {
         window.location.href = "onboarding.html";
+        return;
+      }
+
+      if (user.role === "student") {
+        window.location.href = "students.html";
+      } else if (user.role === "instructor") {
+        window.location.href = "teachers.html";
       }
     })();
 
@@ -275,8 +281,7 @@
         return;
       }
 
-      let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
-
+      const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
       const existingAccount = accounts.find(account => account.email === email);
 
       if (existingAccount) {
@@ -285,9 +290,9 @@
       }
 
       const newAccount = {
-        name: name,
-        email: email,
-        password: password,
+        name,
+        email,
+        password,
         role: role.value
       };
 
@@ -298,9 +303,9 @@
       localStorage.setItem("currentUserRole", role.value);
       localStorage.setItem("currentUserEmail", email);
 
+      // 註冊完先去填資料頁
       window.location.href = "onboarding.html";
     }
   </script>
-
 </body>
 </html>
