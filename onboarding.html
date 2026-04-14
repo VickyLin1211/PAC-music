@@ -1,156 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Complete Your Profile | PAC</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>Complete Your Profile | PAC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #f5ecd9;
-      color: #111;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #f5ecd9;
+  color: #111;
+}
 
-    nav {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      padding: 20px 40px;
-    }
+nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 20px 40px;
+}
 
-    .brand {
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 60px;
-      line-height: 1;
-    }
+.brand {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  line-height: 1;
+}
 
-    .nav-left,
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
 
-    .nav-right {
-      justify-content: flex-end;
-    }
+.nav-right {
+  justify-content: flex-end;
+}
 
-    .nav-left a,
-    .nav-right a {
-      text-decoration: none;
-      color: black;
-      font-size: 14px;
-    }
+.nav-left a,
+.nav-right a {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
 
-    .container {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 60px 24px 100px;
-    }
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 60px 24px 100px;
+}
 
-    .card {
-      background: rgba(255,255,255,0.78);
-      border-radius: 22px;
-      padding: 36px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      border: 1px solid rgba(0,0,0,0.05);
-    }
+.card {
+  background: rgba(255,255,255,0.78);
+  border-radius: 22px;
+  padding: 36px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.05);
+}
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 44px;
-      margin: 0 0 10px;
-      text-align: center;
-    }
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  margin: 0 0 10px;
+  text-align: center;
+}
 
-    .subtitle {
-      text-align: center;
-      color: #666;
-      margin-bottom: 30px;
-      line-height: 1.7;
-      font-size: 15px;
-    }
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.7;
+  font-size: 15px;
+}
 
-    .section-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin: 24px 0 12px;
-      color: #333;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 24px 0 12px;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
 
-    .input-group {
-      margin-bottom: 18px;
-    }
+.input-group {
+  margin-bottom: 18px;
+}
 
-    .input-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 14px;
-    }
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
 
-    .input-group input,
-    .input-group textarea,
-    .input-group select {
-      width: 100%;
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid #ddd;
-      box-sizing: border-box;
-      font-size: 14px;
-      font-family: 'Inter', sans-serif;
-      background: white;
-    }
+.input-group input,
+.input-group textarea,
+.input-group select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  background: white;
+}
 
-    .input-group textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
+.input-group textarea {
+  min-height: 110px;
+  resize: vertical;
+}
 
-    .input-group input:focus,
-    .input-group textarea:focus,
-    .input-group select:focus {
-      outline: none;
-      border: 1px solid black;
-    }
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+  outline: none;
+  border: 1px solid black;
+}
 
-    .save-button {
-      width: 100%;
-      padding: 12px;
-      border-radius: 999px;
-      border: none;
-      background: black;
-      color: white;
-      cursor: pointer;
-      font-size: 14px;
-      transition: 0.2s ease;
-      margin-top: 10px;
-    }
+.save-button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 999px;
+  border: none;
+  background: black;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s ease;
+  margin-top: 10px;
+}
 
-    .save-button:hover {
-      background: #333;
-    }
+.save-button:hover {
+  background: #333;
+}
 
-    .hidden {
-      display: none;
-    }
+.hidden {
+  display: none;
+}
 
-    @media (max-width: 900px) {
-      .brand {
-        font-size: 42px;
-      }
+@media (max-width: 900px) {
+  .brand {
+    font-size: 42px;
+  }
 
-      nav {
-        padding: 20px 24px;
-      }
-    }
-  </style>
+  nav {
+    padding: 20px 24px;
+  }
+}
+</style>
 </head>
 <body>
   <nav>
@@ -168,15 +168,15 @@
 
   <div class="container">
     <div class="card">
-      <h1>Complete Your Profile</h1>
-      <p class="subtitle">Tell us a little more so PAC can personalize your experience.</p>
+      <h1 id="pageTitle">Complete Your Profile</h1>
+      <p class="subtitle" id="pageSubtitle">Tell us a little more so PAC can personalize your experience.</p>
 
       <form id="onboardingForm">
         <div class="section-title">Basic Information</div>
 
         <div class="input-group">
           <label for="fullName">Full Name</label>
-          <input id="fullName" type="text" placeholder="Enter your full name" />
+          <input id="fullName" type="text" placeholder="Enter your full name">
         </div>
 
         <div class="input-group">
@@ -184,13 +184,12 @@
           <textarea id="bio" placeholder="Tell us a little about yourself"></textarea>
         </div>
 
-        <!-- Student Fields -->
         <div id="studentFields" class="hidden">
           <div class="section-title">Student Information</div>
 
           <div class="input-group">
             <label for="instrument">Main Instrument / Subject</label>
-            <input id="instrument" type="text" placeholder="Piano, Voice, Guitar..." />
+            <input id="instrument" type="text" placeholder="Piano, Voice, Guitar...">
           </div>
 
           <div class="input-group">
@@ -205,36 +204,35 @@
 
           <div class="input-group">
             <label for="goal">Learning Goal</label>
-            <input id="goal" type="text" placeholder="Audition prep, hobby, songwriting..." />
+            <input id="goal" type="text" placeholder="Audition prep, hobby, songwriting...">
           </div>
         </div>
 
-        <!-- Instructor Fields -->
         <div id="instructorFields" class="hidden">
           <div class="section-title">Instructor Information</div>
 
           <div class="input-group">
             <label for="specialty">Teaching Specialty</label>
-            <input id="specialty" type="text" placeholder="Piano, Composition, Voice..." />
+            <input id="specialty" type="text" placeholder="Piano, Composition, Voice...">
           </div>
 
           <div class="input-group">
             <label for="experience">Years of Experience</label>
-            <input id="experience" type="text" placeholder="e.g. 5 years" />
+            <input id="experience" type="text" placeholder="e.g. 5 years">
           </div>
 
           <div class="input-group">
             <label for="education">Education / Certification</label>
-            <input id="education" type="text" placeholder="School, degree, certifications..." />
+            <input id="education" type="text" placeholder="School, degree, certifications...">
           </div>
 
           <div class="input-group">
             <label for="language">Teaching Language</label>
-            <input id="language" type="text" placeholder="English, Spanish, Mandarin..." />
+            <input id="language" type="text" placeholder="English, Spanish, Mandarin...">
           </div>
         </div>
 
-        <button type="submit" class="save-button">Save and Continue</button>
+        <button type="submit" class="save-button" id="saveButton">Save and Continue</button>
       </form>
     </div>
   </div>
@@ -250,6 +248,12 @@
 
     function getProfiles() {
       return JSON.parse(localStorage.getItem("userProfiles")) || [];
+    }
+
+    function getCurrentProfile() {
+      const user = getCurrentUser();
+      const profiles = getProfiles();
+      return profiles.find(profile => profile.email === user.email);
     }
 
     function showRoleFields() {
@@ -272,6 +276,35 @@
       }
 
       document.getElementById("fullName").value = user.name || "";
+    }
+
+    function loadExistingProfileIfAny() {
+      const profile = getCurrentProfile();
+      const isEditMode = new URLSearchParams(window.location.search).get("mode") === "edit";
+
+      if (profile) {
+        document.getElementById("fullName").value = profile.fullName || "";
+        document.getElementById("bio").value = profile.bio || "";
+
+        if (profile.role === "student") {
+          document.getElementById("instrument").value = profile.instrument || "";
+          document.getElementById("level").value = profile.level || "";
+          document.getElementById("goal").value = profile.goal || "";
+        }
+
+        if (profile.role === "instructor") {
+          document.getElementById("specialty").value = profile.specialty || "";
+          document.getElementById("experience").value = profile.experience || "";
+          document.getElementById("education").value = profile.education || "";
+          document.getElementById("language").value = profile.language || "";
+        }
+      }
+
+      if (isEditMode) {
+        document.getElementById("pageTitle").innerText = "Edit Your Profile";
+        document.getElementById("pageSubtitle").innerText = "Update your information and save your changes.";
+        document.getElementById("saveButton").innerText = "Save Changes";
+      }
     }
 
     function saveProfile(event) {
@@ -323,6 +356,7 @@
     }
 
     showRoleFields();
+    loadExistingProfileIfAny();
     document.getElementById("onboardingForm").addEventListener("submit", saveProfile);
   </script>
 </body>
