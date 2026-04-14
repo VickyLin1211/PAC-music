@@ -15,7 +15,6 @@ body {
   color: #111;
 }
 
-/* NAVBAR */
 nav {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -48,7 +47,6 @@ nav {
   opacity: 0.6;
 }
 
-/* HERO */
 .hero {
   max-width: 1200px;
   margin: 0 auto;
@@ -71,7 +69,6 @@ nav {
   max-width: 680px;
 }
 
-/* SECTION */
 .section {
   max-width: 1200px;
   margin: 42px auto 0;
@@ -98,7 +95,6 @@ nav {
   white-space: nowrap;
 }
 
-/* PROFILE SUMMARY */
 .profile-summary {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -138,7 +134,21 @@ nav {
   font-size: 15px;
 }
 
-/* SCROLL ROW */
+.edit-profile-btn {
+  display: inline-block;
+  padding: 11px 18px;
+  border-radius: 999px;
+  background: black;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.edit-profile-btn:hover {
+  background: #333;
+}
+
 .scroll-row {
   display: grid;
   grid-auto-flow: column;
@@ -162,7 +172,6 @@ nav {
   background: transparent;
 }
 
-/* CARDS */
 .card {
   scroll-snap-align: start;
   background: rgba(255,255,255,0.72);
@@ -226,7 +235,6 @@ nav {
   opacity: 0.65;
 }
 
-/* TAGS */
 .course-meta {
   margin-top: auto;
   display: flex;
@@ -242,7 +250,6 @@ nav {
   color: #444;
 }
 
-/* UPCOMING LESSON */
 .lesson-box {
   background: rgba(255,255,255,0.72);
   border: 1px solid rgba(0,0,0,0.05);
@@ -270,7 +277,6 @@ nav {
   margin: 0;
 }
 
-/* PROGRESS */
 .progress-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -299,7 +305,6 @@ nav {
   font-size: 14px;
 }
 
-/* LOGOUT */
 .bottom-actions {
   max-width: 1200px;
   margin: 44px auto 90px;
@@ -322,7 +327,6 @@ nav {
   opacity: 0.6;
 }
 
-/* MOBILE */
 @media (max-width: 900px) {
   nav {
     padding: 20px 24px;
@@ -391,7 +395,7 @@ nav {
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="courses.html">Courses</a>
-    <a href="#" onclick="goToLoginOrDashboard()">Login</a>
+    <a href="#" onclick="goToLoginOrDashboard()">Profile</a>
   </div>
 </nav>
 
@@ -402,11 +406,13 @@ nav {
   </p>
 </div>
 
-<!-- YOUR PROFILE -->
 <div class="section">
   <div class="section-header">
     <h2>Your Profile</h2>
-    <div class="section-note">Based on your onboarding details</div>
+    <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+      <div class="section-note">Based on your onboarding details</div>
+      <a class="edit-profile-btn" href="onboarding.html?mode=edit">Edit Profile</a>
+    </div>
   </div>
 
   <div class="profile-summary">
@@ -437,7 +443,6 @@ nav {
   </div>
 </div>
 
-<!-- DISCOVER COURSES -->
 <div class="section">
   <div class="section-header">
     <h2>Discover Courses</h2>
@@ -491,7 +496,6 @@ nav {
   </div>
 </div>
 
-<!-- MY LEARNING -->
 <div class="section">
   <div class="section-header">
     <h2>My Learning</h2>
@@ -522,7 +526,6 @@ nav {
   </div>
 </div>
 
-<!-- UPCOMING LESSON -->
 <div class="section">
   <div class="section-header">
     <h2>Upcoming Lesson</h2>
@@ -537,7 +540,6 @@ nav {
   </div>
 </div>
 
-<!-- PROGRESS -->
 <div class="section">
   <div class="section-header">
     <h2>Your Progress</h2>
