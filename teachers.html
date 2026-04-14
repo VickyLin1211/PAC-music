@@ -68,7 +68,7 @@ nav {
   color: #666;
   font-size: 16px;
   line-height: 1.7;
-  max-width: 640px;
+  max-width: 720px;
   margin: 0;
 }
 
@@ -82,6 +82,46 @@ nav {
   margin-bottom: 18px;
 }
 
+/* PROFILE SUMMARY */
+.profile-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.profile-card {
+  background: rgba(255,255,255,0.72);
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+}
+
+.profile-card.full {
+  grid-column: span 4;
+}
+
+.profile-label {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.profile-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  line-height: 1.15;
+}
+
+.profile-text {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.75;
+}
+
+/* CARDS */
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -266,8 +306,13 @@ nav {
 
 @media (max-width: 900px) {
   .cards,
-  .earnings {
+  .earnings,
+  .profile-summary {
     grid-template-columns: 1fr;
+  }
+
+  .profile-card.full {
+    grid-column: span 1;
   }
 
   nav {
@@ -299,8 +344,6 @@ nav {
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="courses.html">Courses</a>
-     
-
     <a href="#" onclick="goToLoginOrDashboard()">Login</a>
   </div>
 </nav>
@@ -308,8 +351,47 @@ nav {
 <div class="container">
 
   <div class="hero">
-    <h1 id="welcomeText"></h1>
-    <p class="hero-sub">Welcome back to your teaching space. Manage students, courses, and earnings in one place.</p>
+    <h1 id="welcomeText">Welcome back</h1>
+    <p class="hero-sub" id="heroSubtitle">
+      Welcome back to your teaching space. Manage students, courses, and earnings in one place.
+    </p>
+  </div>
+
+  <!-- YOUR PROFILE -->
+  <div class="section">
+    <h2>Your Teaching Profile</h2>
+
+    <div class="profile-summary">
+      <div class="profile-card">
+        <div class="profile-label">Name</div>
+        <div class="profile-value" id="profileName">—</div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-label">Specialty</div>
+        <div class="profile-value" id="profileSpecialty">—</div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-label">Experience</div>
+        <div class="profile-value" id="profileExperience">—</div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-label">Language</div>
+        <div class="profile-value" id="profileLanguage">—</div>
+      </div>
+
+      <div class="profile-card full">
+        <div class="profile-label">Education / Certification</div>
+        <div class="profile-text" id="profileEducation">No education details added yet.</div>
+      </div>
+
+      <div class="profile-card full">
+        <div class="profile-label">About You</div>
+        <div class="profile-text" id="profileBio">No bio added yet.</div>
+      </div>
+    </div>
   </div>
 
   <div class="section">
@@ -351,8 +433,8 @@ nav {
   <div class="section">
     <h2>Upcoming Lesson</h2>
     <div class="card lesson-card">
-      <h3>Piano Lesson with Vicky Lin</h3>
-      <p>April 1 · 7:00 PM</p>
+      <h3 id="lessonTitle">Your next lesson</h3>
+      <p id="lessonMeta">Your next lesson will appear here.</p>
     </div>
   </div>
 
@@ -454,10 +536,20 @@ function getCurrentUser() {
   };
 }
 
+function getProfiles() {
+  return JSON.parse(localStorage.getItem("userProfiles")) || [];
+}
+
+function getCurrentProfile() {
+  const user = getCurrentUser();
+  const profiles = getProfiles();
+  return profiles.find(profile => profile.email === user.email);
+}
+
 function goToLoginOrDashboard() {
   const user = getCurrentUser();
 
-  if (!user.role) {
+  if (!user.role || !user.email) {
     window.location.href = "login.html";
     return;
   }
@@ -467,16 +559,6 @@ function goToLoginOrDashboard() {
   } else {
     window.location.href = "teachers.html";
   }
-}
-
-const user = getCurrentUser();
-
-if (!user.role) {
-  window.location.href = "login.html";
-} else if (user.role !== "instructor") {
-  window.location.href = "students.html";
-} else {
-  document.getElementById("welcomeText").innerText = "Welcome back, " + user.name + ".";
 }
 
 function logout() {
@@ -496,11 +578,13 @@ function closeModal() {
 }
 
 function getCustomCourses() {
-  return JSON.parse(localStorage.getItem("customCourses")) || [];
+  const user = getCurrentUser();
+  return JSON.parse(localStorage.getItem("customCourses_" + user.email)) || [];
 }
 
 function saveCustomCourses(courses) {
-  localStorage.setItem("customCourses", JSON.stringify(courses));
+  const user = getCurrentUser();
+  localStorage.setItem("customCourses_" + user.email, JSON.stringify(courses));
 }
 
 function addCourse() {
@@ -557,7 +641,8 @@ function clearAllCustomCourses() {
   if (!confirm("Are you sure you want to remove all added courses?")) {
     return;
   }
-  localStorage.removeItem("customCourses");
+  const user = getCurrentUser();
+  localStorage.removeItem("customCourses_" + user.email);
   renderTeacherCourses();
 }
 
@@ -605,9 +690,50 @@ function renderTeacherCourses() {
   grid.innerHTML = defaultCards + customCards;
 }
 
+(function initializeTeacherPage() {
+  const user = getCurrentUser();
+
+  if (!user.role || !user.email) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  if (user.role !== "instructor") {
+    window.location.href = "students.html";
+    return;
+  }
+
+  const profile = getCurrentProfile();
+
+  if (!profile) {
+    window.location.href = "onboarding.html";
+    return;
+  }
+
+  document.getElementById("welcomeText").innerText = "Welcome back, " + (profile.fullName || user.name) + ".";
+
+  const specialty = profile.specialty || "music teaching";
+  const language = profile.language || "your preferred language";
+
+  document.getElementById("heroSubtitle").innerText =
+    "Manage your students, courses, and teaching growth in one place. Your current focus is " +
+    specialty + ", and you are available to teach in " + language + ".";
+
+  document.getElementById("profileName").innerText = profile.fullName || user.name || "—";
+  document.getElementById("profileSpecialty").innerText = profile.specialty || "—";
+  document.getElementById("profileExperience").innerText = profile.experience || "—";
+  document.getElementById("profileLanguage").innerText = profile.language || "—";
+  document.getElementById("profileEducation").innerText = profile.education || "No education details added yet.";
+  document.getElementById("profileBio").innerText = profile.bio || "You have not added a bio yet.";
+
+  document.getElementById("lessonTitle").innerText =
+    (profile.specialty || "Music") + " Lesson";
+  document.getElementById("lessonMeta").innerText =
+    "Your next booked lesson will appear here.";
+})();
+
 renderTeacherCourses();
 </script>
 
 </body>
 </html>
-
