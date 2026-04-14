@@ -34,18 +34,72 @@ nav {
 .nav-right {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 24px;
   font-size: 14px;
   flex-wrap: wrap;
+  position: relative;
 }
 
-.nav-right a {
+.nav-right a,
+.account-trigger {
   text-decoration: none;
   color: black;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 0;
 }
 
-.nav-right a:hover {
+.nav-right a:hover,
+.account-trigger:hover {
   opacity: 0.6;
+}
+
+.account-menu {
+  position: relative;
+}
+
+.account-dropdown {
+  display: none;
+  position: absolute;
+  top: 28px;
+  right: 0;
+  min-width: 170px;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  padding: 10px 0;
+  z-index: 100;
+}
+
+.account-dropdown.show {
+  display: block;
+}
+
+.account-dropdown a,
+.account-dropdown button {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: #111;
+  background: none;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.account-dropdown a:hover,
+.account-dropdown button:hover {
+  background: rgba(0,0,0,0.04);
+  opacity: 1;
 }
 
 /* HERO */
@@ -95,6 +149,8 @@ nav {
   display: inline-block;
   transition: 0.25s ease;
   cursor: pointer;
+  border: none;
+  font-family: 'Inter', sans-serif;
 }
 
 .button.primary {
@@ -342,7 +398,15 @@ nav {
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="courses.html">Courses</a>
-    <a href="#" onclick="goToLoginOrDashboard()">Login</a>
+
+    <div class="account-menu">
+      <button id="accountTrigger" class="account-trigger" type="button" onclick="handleAccountClick(event)">Login</button>
+
+      <div id="accountDropdown" class="account-dropdown">
+        <a href="#" onclick="goToDashboard(event)">My Dashboard</a>
+        <button type="button" onclick="logout()">Logout</button>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -359,7 +423,7 @@ nav {
   </p>
 
   <div class="hero-actions">
-    <a class="button primary" href="#" onclick="goToLoginOrDashboard()">Get Started</a>
+    <button class="button primary" type="button" onclick="goToLoginOrDashboard()">Get Started</button>
     <a class="button secondary" href="courses.html">Browse Courses</a>
   </div>
 </div>
@@ -525,7 +589,7 @@ nav {
     <p>
       Whether you want to learn from international teachers or build a more independent teaching path, PAC is designed to make music education feel more open, modern, and connected.
     </p>
-    <a class="button primary" href="#" onclick="goToLoginOrDashboard()">Join PAC</a>
+    <button class="button primary" type="button" onclick="goToLoginOrDashboard()">Join PAC</button>
   </div>
 </div>
 
@@ -538,10 +602,15 @@ function getCurrentUser() {
   };
 }
 
+function isLoggedIn() {
+  const user = getCurrentUser();
+  return !!(user.role && user.email);
+}
+
 function goToLoginOrDashboard() {
   const user = getCurrentUser();
 
-  if (!user.role) {
+  if (!user.role || !user.email) {
     window.location.href = "login.html";
     return;
   }
@@ -552,6 +621,57 @@ function goToLoginOrDashboard() {
     window.location.href = "teachers.html";
   }
 }
+
+function goToDashboard(event) {
+  event.preventDefault();
+  goToLoginOrDashboard();
+}
+
+function logout() {
+  localStorage.removeItem("currentUserName");
+  localStorage.removeItem("currentUserRole");
+  localStorage.removeItem("currentUserEmail");
+  closeAccountDropdown();
+  window.location.href = "index.html";
+}
+
+function updateAccountUI() {
+  const trigger = document.getElementById("accountTrigger");
+  const dropdown = document.getElementById("accountDropdown");
+
+  if (isLoggedIn()) {
+    trigger.textContent = "Profile";
+  } else {
+    trigger.textContent = "Login";
+    dropdown.classList.remove("show");
+  }
+}
+
+function handleAccountClick(event) {
+  event.preventDefault();
+
+  if (!isLoggedIn()) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const dropdown = document.getElementById("accountDropdown");
+  dropdown.classList.toggle("show");
+}
+
+function closeAccountDropdown() {
+  const dropdown = document.getElementById("accountDropdown");
+  dropdown.classList.remove("show");
+}
+
+document.addEventListener("click", function(event) {
+  const menu = document.querySelector(".account-menu");
+  if (!menu.contains(event.target)) {
+    closeAccountDropdown();
+  }
+});
+
+updateAccountUI();
 </script>
 
 </body>
