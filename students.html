@@ -98,6 +98,46 @@ nav {
   white-space: nowrap;
 }
 
+/* PROFILE SUMMARY */
+.profile-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.profile-card {
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 24px;
+  padding: 24px;
+  box-sizing: border-box;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.04);
+}
+
+.profile-card.full {
+  grid-column: span 4;
+}
+
+.profile-label {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.profile-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  line-height: 1.15;
+}
+
+.profile-text {
+  color: #555;
+  line-height: 1.75;
+  font-size: 15px;
+}
+
 /* SCROLL ROW */
 .scroll-row {
   display: grid;
@@ -328,6 +368,14 @@ nav {
   .progress-grid {
     grid-template-columns: 1fr;
   }
+
+  .profile-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-card.full {
+    grid-column: span 1;
+  }
 }
 </style>
 </head>
@@ -340,20 +388,53 @@ nav {
   <div class="brand">PAC</div>
 
   <div class="nav-right">
-     <a href="index.html">Home</a>
-     <a href="about.html">About</a>
-     <a href="courses.html">Courses</a>
-
-    
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="courses.html">Courses</a>
     <a href="#" onclick="goToLoginOrDashboard()">Login</a>
   </div>
 </nav>
 
 <div class="hero">
   <h1 id="welcomeText">Welcome back</h1>
-  <p>
+  <p id="heroSubtitle">
     Continue your music journey with PAC through structured learning, international perspectives, and a clearer path forward.
   </p>
+</div>
+
+<!-- YOUR PROFILE -->
+<div class="section">
+  <div class="section-header">
+    <h2>Your Profile</h2>
+    <div class="section-note">Based on your onboarding details</div>
+  </div>
+
+  <div class="profile-summary">
+    <div class="profile-card">
+      <div class="profile-label">Name</div>
+      <div class="profile-value" id="profileName">—</div>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-label">Instrument</div>
+      <div class="profile-value" id="profileInstrument">—</div>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-label">Level</div>
+      <div class="profile-value" id="profileLevel">—</div>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-label">Goal</div>
+      <div class="profile-value" id="profileGoal">—</div>
+    </div>
+
+    <div class="profile-card full">
+      <div class="profile-label">About You</div>
+      <div class="profile-text" id="profileBio">No bio added yet.</div>
+    </div>
+  </div>
 </div>
 
 <!-- DISCOVER COURSES -->
@@ -448,10 +529,10 @@ nav {
   </div>
 
   <div class="lesson-box">
-    <h3>Piano Lesson with Instructor A</h3>
-    <div class="lesson-meta">April 1, 7:00 PM</div>
-    <p>
-      Continue your current learning path with one-to-one mentorship focused on technique, interpretation, and repertoire development.
+    <h3 id="lessonTitle">Your next lesson</h3>
+    <div class="lesson-meta" id="lessonMeta">Schedule will appear here</div>
+    <p id="lessonDescription">
+      Your next lesson information will appear here as you continue building your learning journey on PAC.
     </p>
   </div>
 </div>
@@ -493,10 +574,20 @@ function getCurrentUser() {
   };
 }
 
+function getProfiles() {
+  return JSON.parse(localStorage.getItem("userProfiles")) || [];
+}
+
+function getCurrentProfile() {
+  const user = getCurrentUser();
+  const profiles = getProfiles();
+  return profiles.find(profile => profile.email === user.email);
+}
+
 function goToLoginOrDashboard() {
   const user = getCurrentUser();
 
-  if (!user.role) {
+  if (!user.role || !user.email) {
     window.location.href = "login.html";
     return;
   }
@@ -508,24 +599,57 @@ function goToLoginOrDashboard() {
   }
 }
 
-const user = getCurrentUser();
-
-if (!user.role) {
-  window.location.href = "login.html";
-} else if (user.role !== "student") {
-  window.location.href = "teachers.html";
-} else {
-  document.getElementById("welcomeText").innerText = "Welcome back, " + user.name + ".";
-}
-
 function logout() {
   localStorage.removeItem("currentUserName");
   localStorage.removeItem("currentUserRole");
   localStorage.removeItem("currentUserEmail");
   window.location.href = "index.html";
 }
+
+(function initializeStudentPage() {
+  const user = getCurrentUser();
+
+  if (!user.role || !user.email) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  if (user.role !== "student") {
+    window.location.href = "teachers.html";
+    return;
+  }
+
+  const profile = getCurrentProfile();
+
+  if (!profile) {
+    window.location.href = "onboarding.html";
+    return;
+  }
+
+  document.getElementById("welcomeText").innerText = "Welcome back, " + (profile.fullName || user.name) + ".";
+
+  const instrument = profile.instrument || "Music";
+  const level = profile.level || "Learner";
+  const goal = profile.goal || "Continue growing through music";
+
+  document.getElementById("heroSubtitle").innerText =
+    "Your current focus is " + instrument + " at the " + level.toLowerCase() +
+    " level. PAC is here to support your goal: " + goal + ".";
+
+  document.getElementById("profileName").innerText = profile.fullName || user.name || "—";
+  document.getElementById("profileInstrument").innerText = profile.instrument || "—";
+  document.getElementById("profileLevel").innerText = profile.level || "—";
+  document.getElementById("profileGoal").innerText = profile.goal || "—";
+  document.getElementById("profileBio").innerText = profile.bio || "You have not added a bio yet.";
+
+  document.getElementById("lessonTitle").innerText = (profile.instrument || "Music") + " Lesson";
+  document.getElementById("lessonMeta").innerText = "Your lesson schedule will appear here after booking.";
+  document.getElementById("lessonDescription").innerText =
+    "Based on your current goal" +
+    (profile.goal ? " — " + profile.goal : "") +
+    ", PAC can help you build a more focused and personalized learning path.";
+})();
 </script>
 
 </body>
 </html>
-
