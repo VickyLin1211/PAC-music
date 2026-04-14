@@ -1,388 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Onboarding | PAC</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Complete Your Profile | PAC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: #f5ecd9;
-  color: #111;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f5ecd9;
+      color: #111;
+    }
 
-nav {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding: 20px 40px;
-}
+    nav {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 20px 40px;
+    }
 
-.brand {
-  text-align: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 56px;
-  line-height: 1;
-}
+    .brand {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 60px;
+      line-height: 1;
+    }
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 24px 100px;
-}
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
 
-.intro {
-  margin-bottom: 30px;
-}
+    .nav-right {
+      justify-content: flex-end;
+    }
 
-.intro h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 54px;
-  margin: 0 0 12px;
-  line-height: 1.05;
-}
+    .nav-left a,
+    .nav-right a {
+      text-decoration: none;
+      color: black;
+      font-size: 14px;
+    }
 
-.intro p {
-  color: #666;
-  font-size: 16px;
-  line-height: 1.8;
-  max-width: 700px;
-  margin: 0;
-}
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
 
-.form-card {
-  background: rgba(255,255,255,0.72);
-  border: 1px solid rgba(0,0,0,0.05);
-  border-radius: 24px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
+    .card {
+      background: rgba(255,255,255,0.78);
+      border-radius: 22px;
+      padding: 36px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
 
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-}
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 44px;
+      margin: 0 0 10px;
+      text-align: center;
+    }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+      line-height: 1.7;
+      font-size: 15px;
+    }
 
-.form-group.full {
-  grid-column: 1 / -1;
-}
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 24px 0 12px;
+      color: #333;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
 
-label {
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: #333;
-}
+    .input-group {
+      margin-bottom: 18px;
+    }
 
-input,
-select,
-textarea {
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.08);
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  background: white;
-  box-sizing: border-box;
-  width: 100%;
-}
+    .input-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
 
-textarea {
-  min-height: 100px;
-  resize: vertical;
-}
+    .input-group input,
+    .input-group textarea,
+    .input-group select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      background: white;
+    }
 
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none;
-  border-color: black;
-}
+    .input-group textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
 
-.actions {
-  margin-top: 24px;
-  display: flex;
-  justify-content: flex-end;
-}
+    .input-group input:focus,
+    .input-group textarea:focus,
+    .input-group select:focus {
+      outline: none;
+      border: 1px solid black;
+    }
 
-.button {
-  padding: 12px 22px;
-  border-radius: 999px;
-  border: none;
-  background: black;
-  color: white;
-  font-size: 14px;
-  cursor: pointer;
-}
+    .save-button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 999px;
+      border: none;
+      background: black;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s ease;
+      margin-top: 10px;
+    }
 
-.button:hover {
-  background: #333;
-}
+    .save-button:hover {
+      background: #333;
+    }
 
-.note {
-  margin-top: 18px;
-  color: #777;
-  font-size: 13px;
-}
+    .hidden {
+      display: none;
+    }
 
-@media (max-width: 900px) {
-  nav {
-    padding: 20px 24px;
-  }
+    @media (max-width: 900px) {
+      .brand {
+        font-size: 42px;
+      }
 
-  .brand {
-    font-size: 42px;
-  }
-
-  .intro h1 {
-    font-size: 42px;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
+      nav {
+        padding: 20px 24px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <nav>
+    <div class="nav-left">
+      <a href="index.html">Home</a>
+    </div>
 
-<nav>
-  <div></div>
-  <div class="brand">PAC</div>
-  <div></div>
-</nav>
+    <div class="brand">PAC</div>
 
-<div class="container">
-  <div class="intro">
-    <h1 id="pageTitle">Complete your profile</h1>
-    <p id="pageSubtitle">Tell us a little more so we can personalize your experience on PAC.</p>
+    <div class="nav-right">
+      <a href="about.html">About</a>
+      <a href="courses.html">Courses</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h1>Complete Your Profile</h1>
+      <p class="subtitle">Tell us a little more so PAC can personalize your experience.</p>
+
+      <form id="onboardingForm">
+        <div class="section-title">Basic Information</div>
+
+        <div class="input-group">
+          <label for="fullName">Full Name</label>
+          <input id="fullName" type="text" placeholder="Enter your full name" />
+        </div>
+
+        <div class="input-group">
+          <label for="bio">Short Bio</label>
+          <textarea id="bio" placeholder="Tell us a little about yourself"></textarea>
+        </div>
+
+        <!-- Student Fields -->
+        <div id="studentFields" class="hidden">
+          <div class="section-title">Student Information</div>
+
+          <div class="input-group">
+            <label for="instrument">Main Instrument / Subject</label>
+            <input id="instrument" type="text" placeholder="Piano, Voice, Guitar..." />
+          </div>
+
+          <div class="input-group">
+            <label for="level">Current Level</label>
+            <select id="level">
+              <option value="">Select your level</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="goal">Learning Goal</label>
+            <input id="goal" type="text" placeholder="Audition prep, hobby, songwriting..." />
+          </div>
+        </div>
+
+        <!-- Instructor Fields -->
+        <div id="instructorFields" class="hidden">
+          <div class="section-title">Instructor Information</div>
+
+          <div class="input-group">
+            <label for="specialty">Teaching Specialty</label>
+            <input id="specialty" type="text" placeholder="Piano, Composition, Voice..." />
+          </div>
+
+          <div class="input-group">
+            <label for="experience">Years of Experience</label>
+            <input id="experience" type="text" placeholder="e.g. 5 years" />
+          </div>
+
+          <div class="input-group">
+            <label for="education">Education / Certification</label>
+            <input id="education" type="text" placeholder="School, degree, certifications..." />
+          </div>
+
+          <div class="input-group">
+            <label for="language">Teaching Language</label>
+            <input id="language" type="text" placeholder="English, Spanish, Mandarin..." />
+          </div>
+        </div>
+
+        <button type="submit" class="save-button">Save and Continue</button>
+      </form>
+    </div>
   </div>
 
-  <div class="form-card">
-    <form id="onboardingForm">
-      <div class="form-grid" id="formFields"></div>
+  <script>
+    function getCurrentUser() {
+      return {
+        name: localStorage.getItem("currentUserName"),
+        role: localStorage.getItem("currentUserRole"),
+        email: localStorage.getItem("currentUserEmail")
+      };
+    }
 
-      <div class="actions">
-        <button type="button" class="button" onclick="saveProfile()">Continue</button>
-      </div>
-    </form>
+    function getProfiles() {
+      return JSON.parse(localStorage.getItem("userProfiles")) || [];
+    }
 
-    <div class="note">You can update this information later.</div>
-  </div>
-</div>
+    function showRoleFields() {
+      const user = getCurrentUser();
 
-<script>
-function getCurrentUser() {
-  return {
-    name: localStorage.getItem("currentUserName"),
-    role: localStorage.getItem("currentUserRole"),
-    email: localStorage.getItem("currentUserEmail")
-  };
-}
+      if (!user.role || !user.email) {
+        window.location.href = "login.html";
+        return;
+      }
 
-const user = getCurrentUser();
+      const studentFields = document.getElementById("studentFields");
+      const instructorFields = document.getElementById("instructorFields");
 
-if (!user.role) {
-  window.location.href = "login.html";
-}
+      if (user.role === "student") {
+        studentFields.classList.remove("hidden");
+        instructorFields.classList.add("hidden");
+      } else if (user.role === "instructor") {
+        instructorFields.classList.remove("hidden");
+        studentFields.classList.add("hidden");
+      }
 
-const studentFields = `
-  <div class="form-group">
-    <label>Gender</label>
-    <select id="gender">
-      <option value="">Select</option>
-      <option>Female</option>
-      <option>Male</option>
-      <option>Non-binary</option>
-      <option>Prefer not to say</option>
-    </select>
-  </div>
+      document.getElementById("fullName").value = user.name || "";
+    }
 
-  <div class="form-group">
-    <label>Age</label>
-    <input id="age" type="number" placeholder="Enter your age">
-  </div>
+    function saveProfile(event) {
+      event.preventDefault();
 
-  <div class="form-group">
-    <label>Birthday</label>
-    <input id="birthday" type="date">
-  </div>
+      const user = getCurrentUser();
 
-  <div class="form-group">
-    <label>Country / City</label>
-    <input id="location" type="text" placeholder="e.g. Boston, USA">
-  </div>
+      if (!user.role || !user.email) {
+        window.location.href = "login.html";
+        return;
+      }
 
-  <div class="form-group">
-    <label>Primary Instrument</label>
-    <input id="instrument" type="text" placeholder="e.g. Piano">
-  </div>
+      const profiles = getProfiles();
+      const existingIndex = profiles.findIndex(profile => profile.email === user.email);
 
-  <div class="form-group">
-    <label>Current Level</label>
-    <select id="level">
-      <option value="">Select</option>
-      <option>Beginner</option>
-      <option>Intermediate</option>
-      <option>Advanced</option>
-    </select>
-  </div>
+      const profileData = {
+        email: user.email,
+        role: user.role,
+        fullName: document.getElementById("fullName").value.trim(),
+        bio: document.getElementById("bio").value.trim()
+      };
 
-  <div class="form-group">
-    <label>Years of Experience</label>
-    <input id="experienceYears" type="text" placeholder="e.g. 4 years">
-  </div>
+      if (user.role === "student") {
+        profileData.instrument = document.getElementById("instrument").value.trim();
+        profileData.level = document.getElementById("level").value;
+        profileData.goal = document.getElementById("goal").value.trim();
+      }
 
-  <div class="form-group">
-    <label>Preferred Lesson Format</label>
-    <select id="lessonFormat">
-      <option value="">Select</option>
-      <option>Online</option>
-      <option>In-person</option>
-      <option>Hybrid</option>
-    </select>
-  </div>
+      if (user.role === "instructor") {
+        profileData.specialty = document.getElementById("specialty").value.trim();
+        profileData.experience = document.getElementById("experience").value.trim();
+        profileData.education = document.getElementById("education").value.trim();
+        profileData.language = document.getElementById("language").value.trim();
+      }
 
-  <div class="form-group">
-    <label>Preferred Language</label>
-    <select id="language">
-      <option value="">Select</option>
-      <option>English</option>
-      <option>Mandarin</option>
-      <option>Spanish</option>
-    </select>
-  </div>
+      if (existingIndex >= 0) {
+        profiles[existingIndex] = profileData;
+      } else {
+        profiles.push(profileData);
+      }
 
-  <div class="form-group full">
-    <label>Learning Goals</label>
-    <textarea id="goals" placeholder="What do you want to improve or achieve through PAC?"></textarea>
-  </div>
-`;
+      localStorage.setItem("userProfiles", JSON.stringify(profiles));
 
-const instructorFields = `
-  <div class="form-group">
-    <label>Gender</label>
-    <select id="gender">
-      <option value="">Select</option>
-      <option>Female</option>
-      <option>Male</option>
-      <option>Non-binary</option>
-      <option>Prefer not to say</option>
-    </select>
-  </div>
+      if (user.role === "student") {
+        window.location.href = "students.html";
+      } else {
+        window.location.href = "teachers.html";
+      }
+    }
 
-  <div class="form-group">
-    <label>Age</label>
-    <input id="age" type="number" placeholder="Enter your age">
-  </div>
-
-  <div class="form-group">
-    <label>Birthday</label>
-    <input id="birthday" type="date">
-  </div>
-
-  <div class="form-group">
-    <label>Country / City</label>
-    <input id="location" type="text" placeholder="e.g. New York, USA">
-  </div>
-
-  <div class="form-group">
-    <label>Primary Teaching Area</label>
-    <input id="specialty" type="text" placeholder="e.g. Jazz Piano">
-  </div>
-
-  <div class="form-group">
-    <label>Years of Teaching Experience</label>
-    <input id="experienceYears" type="text" placeholder="e.g. 8 years">
-  </div>
-
-  <div class="form-group">
-    <label>Certifications / Degrees</label>
-    <input id="credentials" type="text" placeholder="e.g. Berklee College of Music">
-  </div>
-
-  <div class="form-group">
-    <label>Teaching Format</label>
-    <select id="lessonFormat">
-      <option value="">Select</option>
-      <option>Online</option>
-      <option>In-person</option>
-      <option>Hybrid</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label>Teaching Language</label>
-    <select id="language">
-      <option value="">Select</option>
-      <option>English</option>
-      <option>Mandarin</option>
-      <option>Spanish</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label>Starting Price</label>
-    <input id="price" type="text" placeholder="e.g. $45">
-  </div>
-
-  <div class="form-group full">
-    <label>Short Bio</label>
-    <textarea id="bio" placeholder="Describe what you teach and your background."></textarea>
-  </div>
-`;
-
-if (user.role === "student") {
-  document.getElementById("pageTitle").innerText = "Tell us about your learning path";
-  document.getElementById("pageSubtitle").innerText = "We’ll use this to recommend the right courses and teachers for you.";
-  document.getElementById("formFields").innerHTML = studentFields;
-} else {
-  document.getElementById("pageTitle").innerText = "Build your teaching profile";
-  document.getElementById("pageSubtitle").innerText = "Tell us about your experience so students can understand what you offer.";
-  document.getElementById("formFields").innerHTML = instructorFields;
-}
-
-function saveProfile() {
-  const profile = {};
-
-  const inputs = document.querySelectorAll("#formFields input, #formFields select, #formFields textarea");
-  inputs.forEach(input => {
-    profile[input.id] = input.value.trim();
-  });
-
-  profile.name = user.name;
-  profile.email = user.email;
-  profile.role = user.role;
-  profile.completedOnboarding = true;
-
-  let allProfiles = JSON.parse(localStorage.getItem("userProfiles")) || [];
-
-  const existingIndex = allProfiles.findIndex(p => p.email === user.email);
-
-  if (existingIndex !== -1) {
-    allProfiles[existingIndex] = profile;
-  } else {
-    allProfiles.push(profile);
-  }
-
-  localStorage.setItem("userProfiles", JSON.stringify(allProfiles));
-
-  if (user.role === "student") {
-    window.location.href = "students.html";
-  } else {
-    window.location.href = "teachers.html";
-  }
-}
-</script>
-
+    showRoleFields();
+    document.getElementById("onboardingForm").addEventListener("submit", saveProfile);
+  </script>
 </body>
 </html>
