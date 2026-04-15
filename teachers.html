@@ -317,6 +317,23 @@ nav {
   font-size: 14px;
 }
 
+.empty-box {
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 24px;
+  padding: 30px;
+  color: #666;
+  line-height: 1.8;
+  max-width: 760px;
+}
+
+.empty-box strong {
+  display: block;
+  color: #111;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
 @media (max-width: 900px) {
   .cards,
   .earnings,
@@ -411,61 +428,32 @@ nav {
 
   <div class="section">
     <h2>Students</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Vicky Lin</h3>
-        <p>Piano Fundamentals · Lesson 3</p>
-      </div>
-      <div class="card">
-        <h3>Jason Chen</h3>
-        <p>Music Production · Lesson 1</p>
-      </div>
-      <div class="card">
-        <h3>Emily Wang</h3>
-        <p>Composition Workshop · Lesson 5</p>
-      </div>
-    </div>
+    <div id="studentsContainer"></div>
   </div>
 
   <div class="section">
     <h2>Courses</h2>
-    <div class="cards" id="teacherCoursesGrid">
-      <div class="card">
-        <h3>Piano Fundamentals</h3>
-        <p>12 students enrolled</p>
-      </div>
-      <div class="card">
-        <h3>Composition Workshop</h3>
-        <p>8 students enrolled</p>
-      </div>
-      <div class="card">
-        <h3>Music Production</h3>
-        <p>10 students enrolled</p>
-      </div>
-    </div>
+    <div class="cards" id="teacherCoursesGrid"></div>
   </div>
 
   <div class="section">
     <h2>Upcoming Lesson</h2>
-    <div class="card lesson-card">
-      <h3 id="lessonTitle">Your next lesson</h3>
-      <p id="lessonMeta">Your next lesson will appear here.</p>
-    </div>
+    <div id="lessonContainer"></div>
   </div>
 
   <div class="section">
     <h2>Earnings</h2>
     <div class="earnings">
       <div class="earning-card">
-        <div class="amount">$1,240</div>
+        <div class="amount" id="totalRevenue">$0</div>
         <div class="label">Total Revenue</div>
       </div>
       <div class="earning-card">
-        <div class="amount">$186</div>
+        <div class="amount" id="platformFee">$0</div>
         <div class="label">PAC Fee (15%)</div>
       </div>
       <div class="earning-card">
-        <div class="amount">$1,054</div>
+        <div class="amount" id="netEarnings">$0</div>
         <div class="label">Your Earnings</div>
       </div>
     </div>
@@ -559,6 +547,39 @@ function getCurrentProfile() {
   const user = getCurrentUser();
   const profiles = getProfiles();
   return profiles.find(profile => profile.email === user.email);
+}
+
+function getTeacherDashboardKey() {
+  const user = getCurrentUser();
+  return "teacherDashboard_" + user.email;
+}
+
+function createEmptyTeacherDashboard() {
+  return {
+    students: [],
+    upcomingLesson: null,
+    earnings: {
+      totalRevenue: 0,
+      platformFee: 0,
+      netEarnings: 0
+    }
+  };
+}
+
+function getTeacherDashboardData() {
+  const key = getTeacherDashboardKey();
+  let data = JSON.parse(localStorage.getItem(key));
+
+  if (!data) {
+    data = createEmptyTeacherDashboard();
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  return data;
+}
+
+function saveTeacherDashboardData(data) {
+  localStorage.setItem(getTeacherDashboardKey(), JSON.stringify(data));
 }
 
 function goToLoginOrDashboard() {
@@ -665,20 +686,15 @@ function renderTeacherCourses() {
   const grid = document.getElementById("teacherCoursesGrid");
   const customCourses = getCustomCourses();
 
-  const defaultCards = `
-    <div class="card">
-      <h3>Piano Fundamentals</h3>
-      <p>12 students enrolled</p>
-    </div>
-    <div class="card">
-      <h3>Composition Workshop</h3>
-      <p>8 students enrolled</p>
-    </div>
-    <div class="card">
-      <h3>Music Production</h3>
-      <p>10 students enrolled</p>
-    </div>
-  `;
+  if (!customCourses.length) {
+    grid.innerHTML = `
+      <div class="empty-box">
+        <strong>No courses yet</strong>
+        You have not added any courses yet. Start by creating your first course.
+      </div>
+    `;
+    return;
+  }
 
   const customCards = customCourses.map(course => `
     <div class="card">
@@ -702,7 +718,69 @@ function renderTeacherCourses() {
     </div>
   `).join("");
 
-  grid.innerHTML = defaultCards + customCards;
+  grid.innerHTML = customCards;
+}
+
+function renderStudents(data) {
+  const container = document.getElementById("studentsContainer");
+
+  if (!data.students || data.students.length === 0) {
+    container.innerHTML = `
+      <div class="empty-box">
+        <strong>No students yet</strong>
+        Your student list will appear here once learners book or join your courses.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="cards">
+      ${data.students.map(student => `
+        <div class="card">
+          <h3>${student.name}</h3>
+          <p>${student.course || "Course"}${student.lesson ? " · Lesson " + student.lesson : ""}</p>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderUpcomingLesson(data, profile) {
+  const container = document.getElementById("lessonContainer");
+
+  if (!data.upcomingLesson) {
+    container.innerHTML = `
+      <div class="empty-box">
+        <strong>No upcoming lesson yet</strong>
+        Your next booked lesson will appear here${profile && profile.specialty ? " for " + profile.specialty : ""}.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="card lesson-card">
+      <h3>${data.upcomingLesson.title || "Your next lesson"}</h3>
+      <p>${data.upcomingLesson.time || "Schedule coming soon"}</p>
+    </div>
+  `;
+}
+
+function formatMoney(value) {
+  return "$" + Number(value || 0).toLocaleString();
+}
+
+function renderEarnings(data) {
+  const earnings = data.earnings || {
+    totalRevenue: 0,
+    platformFee: 0,
+    netEarnings: 0
+  };
+
+  document.getElementById("totalRevenue").innerText = formatMoney(earnings.totalRevenue);
+  document.getElementById("platformFee").innerText = formatMoney(earnings.platformFee);
+  document.getElementById("netEarnings").innerText = formatMoney(earnings.netEarnings);
 }
 
 (function initializeTeacherPage() {
@@ -725,6 +803,8 @@ function renderTeacherCourses() {
     return;
   }
 
+  const dashboardData = getTeacherDashboardData();
+
   document.getElementById("welcomeText").innerText = "Welcome back, " + (profile.fullName || user.name) + ".";
 
   const specialty = profile.specialty || "music teaching";
@@ -741,15 +821,12 @@ function renderTeacherCourses() {
   document.getElementById("profileEducation").innerText = profile.education || "No education details added yet.";
   document.getElementById("profileBio").innerText = profile.bio || "You have not added a bio yet.";
 
-  document.getElementById("lessonTitle").innerText =
-    (profile.specialty || "Music") + " Lesson";
-  document.getElementById("lessonMeta").innerText =
-    "Your next booked lesson will appear here.";
+  renderStudents(dashboardData);
+  renderTeacherCourses();
+  renderUpcomingLesson(dashboardData, profile);
+  renderEarnings(dashboardData);
 })();
-
-renderTeacherCourses();
 </script>
 
 </body>
 </html>
-
