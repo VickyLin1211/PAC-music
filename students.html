@@ -305,6 +305,23 @@ nav {
   font-size: 14px;
 }
 
+.empty-box {
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 24px;
+  padding: 30px;
+  color: #666;
+  line-height: 1.8;
+  max-width: 760px;
+}
+
+.empty-box strong {
+  display: block;
+  color: #111;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
 .bottom-actions {
   max-width: 1200px;
   margin: 44px auto 90px;
@@ -499,31 +516,10 @@ nav {
 <div class="section">
   <div class="section-header">
     <h2>My Learning</h2>
-    <div class="section-note">Swipe to explore →</div>
+    <div class="section-note">Your courses and saved learning</div>
   </div>
 
-  <div class="scroll-row">
-    <div class="card learning-card">
-      <div class="card-label">In Progress</div>
-      <h3>Piano Fundamentals</h3>
-      <p>You are currently on Lesson 3 and building stronger technique and confidence through guided practice.</p>
-      <a class="card-link" href="#">Continue learning →</a>
-    </div>
-
-    <div class="card learning-card">
-      <div class="card-label">Started</div>
-      <h3>Songwriting Workshop</h3>
-      <p>You have completed your first lesson and are beginning to explore melody writing and lyrical structure.</p>
-      <a class="card-link" href="#">Return to course →</a>
-    </div>
-
-    <div class="card learning-card">
-      <div class="card-label">Saved</div>
-      <h3>Music Production Basics</h3>
-      <p>This course is saved to your learning path and ready for you to begin when you want to expand your workflow.</p>
-      <a class="card-link" href="#">Start course →</a>
-    </div>
-  </div>
+  <div id="learningContainer"></div>
 </div>
 
 <div class="section">
@@ -531,13 +527,7 @@ nav {
     <h2>Upcoming Lesson</h2>
   </div>
 
-  <div class="lesson-box">
-    <h3 id="lessonTitle">Your next lesson</h3>
-    <div class="lesson-meta" id="lessonMeta">Schedule will appear here</div>
-    <p id="lessonDescription">
-      Your next lesson information will appear here as you continue building your learning journey on PAC.
-    </p>
-  </div>
+  <div id="lessonContainer"></div>
 </div>
 
 <div class="section">
@@ -547,17 +537,17 @@ nav {
 
   <div class="progress-grid">
     <div class="progress-card">
-      <div class="progress-number">3</div>
+      <div class="progress-number" id="joinedCount">0</div>
       <div class="progress-label">Courses Joined</div>
     </div>
 
     <div class="progress-card">
-      <div class="progress-number">1</div>
+      <div class="progress-number" id="completedCount">0</div>
       <div class="progress-label">Completed</div>
     </div>
 
     <div class="progress-card">
-      <div class="progress-number">2</div>
+      <div class="progress-number" id="inProgressCount">0</div>
       <div class="progress-label">In Progress</div>
     </div>
   </div>
@@ -586,6 +576,34 @@ function getCurrentProfile() {
   return profiles.find(profile => profile.email === user.email);
 }
 
+function getStudentDashboardKey() {
+  const user = getCurrentUser();
+  return "studentDashboard_" + user.email;
+}
+
+function createEmptyStudentDashboard() {
+  return {
+    learning: [],
+    upcomingLesson: null
+  };
+}
+
+function getStudentDashboardData() {
+  const key = getStudentDashboardKey();
+  let data = JSON.parse(localStorage.getItem(key));
+
+  if (!data) {
+    data = createEmptyStudentDashboard();
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  return data;
+}
+
+function saveStudentDashboardData(data) {
+  localStorage.setItem(getStudentDashboardKey(), JSON.stringify(data));
+}
+
 function goToLoginOrDashboard() {
   const user = getCurrentUser();
 
@@ -608,6 +626,65 @@ function logout() {
   window.location.href = "index.html";
 }
 
+function renderLearning(data) {
+  const container = document.getElementById("learningContainer");
+
+  if (!data.learning || data.learning.length === 0) {
+    container.innerHTML = `
+      <div class="empty-box">
+        <strong>No courses yet</strong>
+        You have not joined any courses yet. Start by browsing courses and building your learning path on PAC.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="scroll-row">
+      ${data.learning.map(item => `
+        <div class="card learning-card">
+          <div class="card-label">${item.status || "Saved"}</div>
+          <h3>${item.title}</h3>
+          <p>${item.description || "This course is part of your learning journey on PAC."}</p>
+          <a class="card-link" href="#">View course →</a>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderUpcomingLesson(data, profile) {
+  const container = document.getElementById("lessonContainer");
+
+  if (!data.upcomingLesson) {
+    container.innerHTML = `
+      <div class="empty-box">
+        <strong>No upcoming lesson yet</strong>
+        Your lesson schedule will appear here once you book a class${profile && profile.instrument ? " for " + profile.instrument : ""}.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="lesson-box">
+      <h3>${data.upcomingLesson.title || "Your next lesson"}</h3>
+      <div class="lesson-meta">${data.upcomingLesson.time || "Schedule coming soon"}</div>
+      <p>${data.upcomingLesson.description || "Your next lesson information will appear here."}</p>
+    </div>
+  `;
+}
+
+function renderProgress(data) {
+  const joined = data.learning ? data.learning.length : 0;
+  const completed = data.learning ? data.learning.filter(item => item.status === "Completed").length : 0;
+  const inProgress = data.learning ? data.learning.filter(item => item.status === "In Progress").length : 0;
+
+  document.getElementById("joinedCount").innerText = joined;
+  document.getElementById("completedCount").innerText = completed;
+  document.getElementById("inProgressCount").innerText = inProgress;
+}
+
 (function initializeStudentPage() {
   const user = getCurrentUser();
 
@@ -628,11 +705,13 @@ function logout() {
     return;
   }
 
+  const dashboardData = getStudentDashboardData();
+
   document.getElementById("welcomeText").innerText = "Welcome back, " + (profile.fullName || user.name) + ".";
 
-  const instrument = profile.instrument || "Music";
-  const level = profile.level || "Learner";
-  const goal = profile.goal || "Continue growing through music";
+  const instrument = profile.instrument || "music";
+  const level = profile.level || "learner";
+  const goal = profile.goal || "continue growing through music";
 
   document.getElementById("heroSubtitle").innerText =
     "Your current focus is " + instrument + " at the " + level.toLowerCase() +
@@ -644,12 +723,9 @@ function logout() {
   document.getElementById("profileGoal").innerText = profile.goal || "—";
   document.getElementById("profileBio").innerText = profile.bio || "You have not added a bio yet.";
 
-  document.getElementById("lessonTitle").innerText = (profile.instrument || "Music") + " Lesson";
-  document.getElementById("lessonMeta").innerText = "Your lesson schedule will appear here after booking.";
-  document.getElementById("lessonDescription").innerText =
-    "Based on your current goal" +
-    (profile.goal ? " — " + profile.goal : "") +
-    ", PAC can help you build a more focused and personalized learning path.";
+  renderLearning(dashboardData);
+  renderUpcomingLesson(dashboardData, profile);
+  renderProgress(dashboardData);
 })();
 </script>
 
